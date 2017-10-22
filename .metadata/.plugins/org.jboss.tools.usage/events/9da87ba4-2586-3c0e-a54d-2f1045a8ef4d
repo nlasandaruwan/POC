@@ -1,0 +1,11 @@
+#Mon Mar 21 20:55:05 SGT 2016
+vl=How many times the 'Finish' button pressed during the day
+l=Wizard class name
+ct=jbt
+d=1458564905861
+c=0
+cmp=usage
+a=finishWizard
+cl=org.jboss.tools.jsf.ui.editor.check.wizards.QuickFixWizard
+v=2.0.0
+s=0

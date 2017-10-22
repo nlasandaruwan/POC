@@ -1,0 +1,10 @@
+package com.runable;
+
+public class MyRunnable2 implements Runnable{
+
+	@Override
+	public void run() {
+		System.out.println("Now Running  : "+ Thread.currentThread().getName());
+	}
+
+}

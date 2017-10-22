@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<cache:CacheIndex xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:cache="http://eclipse.org/dltk/cache_model" lastIndex="4" environment="org.eclipse.dltk.core.environment.localEnvironment">
+  <entries path="A:/Java SW/eclipse_Luna_WS/TestRuby/TestRub.rb" timestamp="1433856046968" lastAccessTime="1441114700002">
+    <attributes name="indexed" location="2838196607/3503834908/3.idx"/>
+  </entries>
+  <entries path="A:/Java SW/eclipse_Luna_WS/TestRuby" timestamp="1433855893525" lastAccessTime="1440427024312">
+    <attributes name=".dltk.core.archive.cache.lastaccess" location="2838196607/2213736623/1.idx"/>
+  </entries>
+</cache:CacheIndex>

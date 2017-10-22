@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/main-template.xhtml">
+
+<ui:define name="title">Nested Flow Results Page</ui:define>
+
+<ui:define name="content">
+<fieldset>
+<legend>Configuring Nested Flows in Java Code</legend>
+<ul>
+  <li>Param 3: #{javaNestedFlowBean.param3}</li>
+  <li>Param 4: #{javaNestedFlowBean.param4}</li>
+</ul>
+<h:form>
+  <h:commandButton value="Nested Flow Start Page" 
+                   action="thirdJavaFlow"/>
+  <h:commandButton value="Calling Flow Start Page" 
+                   action="return-to-previous-start"/>
+  <h:commandButton value="Calling Flow Results Page" 
+                   action="return-to-previous-results"/>
+</h:form>
+</fieldset>
+</ui:define>
+  
+</ui:composition>

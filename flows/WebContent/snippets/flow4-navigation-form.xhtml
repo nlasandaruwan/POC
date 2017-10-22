@@ -1,0 +1,21 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<fieldset>
+<legend>Flow 4: Configuring Flow in Main faces-config.xml File</legend>
+<h:form>
+<ul>
+  <li>Email address: #{flowScope.email}</li>
+  <li>First name: #{flow4Bean.firstName}</li>
+  <li>Last name: #{flow4Bean.lastName}</li>
+  <li>Number pages viewed: #{flow4Bean.pagesViewed}</li>
+  <li>Navigate: 
+      <h:commandLink value="Start Page" action="startPage"/>,
+      <h:commandLink value="Confirmation Page 1" action="confirmation1"/>,
+      <h:commandLink value="Confirmation Page 2" action="confirmation2"/>,
+      <h:commandLink value="Return Page" action="return-from-flow4"/>,
+      <h:commandLink value="Home Page" action="go-home"/></li>
+</ul>
+</h:form>
+</fieldset>
+</ui:composition>

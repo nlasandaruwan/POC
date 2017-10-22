@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/main-template.xhtml">
+
+<ui:define name="title">Checkout</ui:define>
+
+<ui:define name="content">
+<h:panelGrid columns="4" styleClass="cartTable">
+  <h:outputText value="Book"/>
+  <h:outputText value="Price"/>
+  <h:outputText value="Number"/>
+  <h:outputText value="Total Cost"/>
+
+  <h:outputText value="#{checkoutFlowBean.special1.title}"/>
+  <h:outputText value="#{checkoutFlowBean.special1.dollars}"/>
+  <h:outputText value="#{checkoutFlowBean.special1.orders}"/>
+  <h:outputText value="#{checkoutFlowBean.special1.totalDollars}"/>
+  
+  <h:outputText value="#{checkoutFlowBean.special2.title}"/>
+  <h:outputText value="#{checkoutFlowBean.special2.dollars}"/>
+  <h:outputText value="#{checkoutFlowBean.special2.orders}"/>
+  <h:outputText value="#{checkoutFlowBean.special2.totalDollars}"/>
+  
+  <h:outputText value=""/>
+  <h:outputText value=""/>
+  <h:outputText value=""/>
+  <h:outputText value="#{checkoutFlowBean.totalDollars}"/>
+</h:panelGrid>
+<br/>
+<fieldset>
+<legend>Credit Card Info</legend>
+<h:form>
+<h:panelGrid columns="3" styleClass="formTable">
+  Name:
+  <h:inputText value="#{checkoutFlowBean.name}" id="name"
+               required="true"
+               requiredMessage="Cannot be blank"/>
+  <h:message for="name" styleClass="error"/>
+  
+  Credit card type:
+  <h:inputText value="#{checkoutFlowBean.cardType}" id="cardType"
+               required="true"
+               requiredMessage="Cannot be blank"/>
+  <h:message for="cardType" styleClass="error"/>
+  
+  Credit card number:
+  <h:inputText value="#{checkoutFlowBean.cardNumber}" id="cardNumber"
+               required="true"
+               requiredMessage="Cannot be blank"
+               validatorMessage="Must be 16 digits">
+    <f:validateLength minimum="16" maximum="16"/>
+  </h:inputText>
+  <h:message for="cardNumber" styleClass="error"/>
+  
+  Address:
+  <h:inputText value="#{checkoutFlowBean.address}" id="address"
+               required="true"
+               requiredMessage="Cannot be blank"/>
+  <h:message for="address" styleClass="error"/>
+  
+  Email:
+  <h:inputText value="#{checkoutFlowBean.email}" id="email"
+               required="true"
+               requiredMessage="Cannot be blank"/>
+  <h:message for="email" styleClass="error"/>
+  
+  <f:facet name="footer">
+    <h:commandButton value="Purchase" action="confirm"/>
+    <h:commandButton value="Cancel and Quit" action="exit"
+                     immediate="true"/>
+    <h:commandButton value="Cancel and Return to Shopping" 
+                     action="back-to-shopping"
+                     immediate="true"/>
+  </f:facet>
+</h:panelGrid>
+</h:form>
+</fieldset>
+</ui:define>
+  
+</ui:composition>

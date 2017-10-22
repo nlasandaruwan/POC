@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:body>
+<fieldset>
+		<legend>Bank Customer Lookup (Request Scope)</legend>
+		
+		<h:form>
+		<h3>#{applicationScopeMessage.message}</h3>
+		<h3>#{sessionScopeMessage.message}</h3>
+Customer ID:
+<h:inputText value="#{bankingBean.customerId}" />
+			<br />
+Password:
+<h:inputSecret value="#{bankingBean.password}" />
+			<br />
+			<h:commandButton value="Show Current Balance"
+				action="#{bankingBean.showBalance}" />
+				
+		</h:form>
+	</fieldset>
+</h:body>
+</html>

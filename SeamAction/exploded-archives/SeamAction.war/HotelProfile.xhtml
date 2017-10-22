@@ -1,0 +1,121 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+    
+    <rich:panel>
+        <f:facet name="header">HotelProfile</f:facet>
+
+
+        <s:decorate id="profileId" template="layout/display.xhtml">
+            <ui:define name="label">profileId</ui:define>
+            #{hotelProfileHome.instance.profileId}
+        </s:decorate>
+
+
+        <s:decorate id="address1" template="layout/display.xhtml">
+            <ui:define name="label">address1</ui:define>
+            #{hotelProfileHome.instance.address1}
+        </s:decorate>
+
+
+        <s:decorate id="address2" template="layout/display.xhtml">
+            <ui:define name="label">address2</ui:define>
+            #{hotelProfileHome.instance.address2}
+        </s:decorate>
+
+
+        <s:decorate id="city" template="layout/display.xhtml">
+            <ui:define name="label">city</ui:define>
+            #{hotelProfileHome.instance.city}
+        </s:decorate>
+
+
+        <s:decorate id="contactNumber1" template="layout/display.xhtml">
+            <ui:define name="label">contactNumber1</ui:define>
+            #{hotelProfileHome.instance.contactNumber1}
+        </s:decorate>
+
+
+        <s:decorate id="contactNumber2" template="layout/display.xhtml">
+            <ui:define name="label">contactNumber2</ui:define>
+            #{hotelProfileHome.instance.contactNumber2}
+        </s:decorate>
+
+
+        <s:decorate id="country" template="layout/display.xhtml">
+            <ui:define name="label">country</ui:define>
+            #{hotelProfileHome.instance.country}
+        </s:decorate>
+
+
+        <s:decorate id="direction" template="layout/display.xhtml">
+            <ui:define name="label">direction</ui:define>
+            #{hotelProfileHome.instance.direction}
+        </s:decorate>
+
+
+        <s:decorate id="email" template="layout/display.xhtml">
+            <ui:define name="label">email</ui:define>
+            #{hotelProfileHome.instance.email}
+        </s:decorate>
+
+
+        <s:decorate id="fax" template="layout/display.xhtml">
+            <ui:define name="label">fax</ui:define>
+            #{hotelProfileHome.instance.fax}
+        </s:decorate>
+
+
+        <s:decorate id="hotelDescription" template="layout/display.xhtml">
+            <ui:define name="label">hotelDescription</ui:define>
+            #{hotelProfileHome.instance.hotelDescription}
+        </s:decorate>
+
+
+        <s:decorate id="hotelName" template="layout/display.xhtml">
+            <ui:define name="label">hotelName</ui:define>
+            #{hotelProfileHome.instance.hotelName}
+        </s:decorate>
+
+
+        <s:decorate id="otherWebs" template="layout/display.xhtml">
+            <ui:define name="label">otherWebs</ui:define>
+            #{hotelProfileHome.instance.otherWebs}
+        </s:decorate>
+
+
+        <s:decorate id="postalCode" template="layout/display.xhtml">
+            <ui:define name="label">postalCode</ui:define>
+            #{hotelProfileHome.instance.postalCode}
+        </s:decorate>
+
+        <div style="clear:both"/>
+        
+    </rich:panel>
+    
+    <div class="actionButtons">      
+
+        <s:button view="/HotelProfileEdit.xhtml" 
+                    id="edit" 
+                 value="Edit"/>
+
+        <s:button view="/#{empty hotelProfileFrom ? 'HotelProfileList' : hotelProfileFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>

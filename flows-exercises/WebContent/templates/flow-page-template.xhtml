@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+<title><ui:insert name="title">Title Here</ui:insert></title>
+<h:outputStylesheet name="styles.css" library="css"/>
+</h:head>
+<h:body>
+<h1 class="title"><ui:insert name="title">Title Here</ui:insert></h1><br/>
+<ui:insert name="extra-content"></ui:insert>
+<fieldset>
+<legend>Navigate to Main Flow Pages</legend>
+<p>Only the links that apply to current flow should work.
+The links that apply to the other flow should result in error messages.
+However, when using CDI with Tomcat via the Weld servlet, the system
+does not properly enforce that you cannot use an outcome referring to
+a page outside the flow other than yourflow-return. Glassfish and
+other full Java EE 7 servers enforce this correctly.</p>
+<h:form>
+<ul>
+  <li><h:commandLink value="First Flow Start Page" action="first-flow"/></li>
+  <li><h:commandLink value="First Flow Return Page" action="first-flow-return"/></li>
+  <li><h:commandLink value="Second Flow Start Page" action="second-flow"/></li>
+  <li><h:commandLink value="Second Flow Return Page" action="second-flow-return"/></li>
+</ul>
+</h:form>
+</fieldset>
+<br/>
+<fieldset>
+<legend>Navigate to Additional Pages Within Flow</legend>
+<p>Since both first-flow and second-flow have internal pages named
+page1.xhtml, page2.xhtml, and page3.xhtml, all of these links will
+work, regardless of which flow you are in.</p>
+<h:form>
+<ul>
+  <li><h:commandLink value="Page 1" action="page1"/></li>
+  <li><h:commandLink value="Page 2" action="page2"/></li>
+  <li><h:commandLink value="Page 3" action="page3"/></li>
+</ul>
+</h:form>
+</fieldset>
+<br/>
+</h:body></html>

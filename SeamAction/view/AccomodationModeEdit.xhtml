@@ -1,0 +1,249 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    <h:form id="accomodationMode" styleClass="edit">
+    
+        <rich:panel>
+            <f:facet name="header">#{accomodationModeHome.managed ? 'Edit' : 'Add'} AccomodationMode</f:facet>
+
+
+            <s:decorate id="accomodationModeIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">accomodationModeId</ui:define>
+                <h:inputText id="accomodationModeId"
+                       required="true"
+                       disabled="#{accomodationModeHome.managed}"
+                          value="#{accomodationModeHome.instance.accomodationModeId}">
+                    <a:support event="onblur" reRender="accomodationModeIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="accomodationDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">accomodation</ui:define>
+                <h:inputTextarea id="accomodation"
+                               cols="80"
+                               rows="3"
+                              value="#{accomodationModeHome.instance.accomodation}"/>
+            </s:decorate>
+
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+        </rich:panel>
+                
+        <div class="actionButtons">
+
+            <h:commandButton id="save" 
+                          value="Save" 
+                         action="#{accomodationModeHome.persist}"
+                       disabled="#{!accomodationModeHome.wired}"
+                       rendered="#{!accomodationModeHome.managed}"/>  
+                          			  
+            <h:commandButton id="update" 
+                          value="Save" 
+                         action="#{accomodationModeHome.update}"
+                       rendered="#{accomodationModeHome.managed}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{accomodationModeHome.remove}"
+                      immediate="true"
+                       rendered="#{accomodationModeHome.managed}"/>
+                    
+            <s:button id="done" 
+                   value="Done"
+             propagation="end"
+                    view="/AccomodationMode.xhtml"
+                rendered="#{accomodationModeHome.managed}"/>
+                
+            <s:button id="cancel" 
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty accomodationModeFrom ? 'AccomodationModeList' : accomodationModeFrom}.xhtml"
+                rendered="#{!accomodationModeHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="reservations">
+        <div class="association" id="reservationsChildren">
+        
+            <h:outputText value="There are no reservations associated with this accomodationMode." 
+                       rendered="#{empty accomodationModeHome.reservations}"/>
+        
+            <rich:dataTable value="#{accomodationModeHome.reservations}" 
+                           var="reservation" 
+                      rendered="#{not empty accomodationModeHome.reservations}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="reservationsTable">
+                <h:column>
+                    <f:facet name="header">reservationId</f:facet>
+                    <h:outputText value="#{reservation.reservationId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">adults</f:facet>
+                    <h:outputText value="#{reservation.adults}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">airportPickup</f:facet>
+                    <h:outputText value="#{reservation.airportPickup}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">arrivalFrom</f:facet>
+                    <h:outputText value="#{reservation.arrivalFrom}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">arriveFor</f:facet>
+                    <h:outputText value="#{reservation.arriveFor}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">children</f:facet>
+                    <h:outputText value="#{reservation.children}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">fromDate</f:facet>
+                    <h:outputText value="#{reservation.fromDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">leaveAfter</f:facet>
+                    <h:outputText value="#{reservation.leaveAfter}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">nationality</f:facet>
+                    <h:outputText value="#{reservation.nationality}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">noofRooms</f:facet>
+                    <h:outputText value="#{reservation.noofRooms}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">reservationStatus</f:facet>
+                    <h:outputText value="#{reservation.reservationStatus}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomCategory</f:facet>
+                    <h:outputText value="#{reservation.roomCategory}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomCategoryId</f:facet>
+                    <h:outputText value="#{reservation.roomCategoryId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomType</f:facet>
+                    <h:outputText value="#{reservation.roomType}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomTypeId</f:facet>
+                    <h:outputText value="#{reservation.roomTypeId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">toDate</f:facet>
+                    <h:outputText value="#{reservation.toDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">action</f:facet>
+                    <s:link view="/Reservation.xhtml" 
+                              id="selectreservation" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="reservationReservationId" 
+                                value="#{reservation.reservationId}"/>
+                        <f:param name="reservationFrom" value="AccomodationMode"/>
+                    </s:link>
+                </h:column>
+            </rich:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{accomodationModeHome.managed}" id="reservations">
+        <div class="actionButtons">
+            <s:button id="addreservation" 
+                   value="Add reservation"
+                    view="/ReservationEdit.xhtml"
+             propagation="none">
+                 <f:param name="accomodationModeAccomodationModeId" 
+                         value="#{accomodationModeHome.instance.accomodationModeId}"/>
+                 <f:param name="reservationFrom" value="AccomodationMode"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+
+    <rich:tab label="roomRateses">
+        <div class="association" id="roomRatesesChildren">
+        
+            <h:outputText value="There are no roomRateses associated with this accomodationMode." 
+                       rendered="#{empty accomodationModeHome.roomRateses}"/>
+        
+            <rich:dataTable value="#{accomodationModeHome.roomRateses}" 
+                           var="roomRates" 
+                      rendered="#{not empty accomodationModeHome.roomRateses}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="roomRatesesTable">
+                <h:column>
+                    <f:facet name="header">roomRateId</f:facet>
+                    <h:outputText value="#{roomRates.roomRateId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">price</f:facet>
+                    <h:outputText value="#{roomRates.price}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">validFrom</f:facet>
+                    <h:outputText value="#{roomRates.validFrom}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">validTo</f:facet>
+                    <h:outputText value="#{roomRates.validTo}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">action</f:facet>
+                    <s:link view="/RoomRates.xhtml" 
+                              id="selectroomRates" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="roomRatesRoomRateId" 
+                                value="#{roomRates.roomRateId}"/>
+                        <f:param name="roomRatesFrom" value="AccomodationMode"/>
+                    </s:link>
+                </h:column>
+            </rich:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{accomodationModeHome.managed}" id="roomRateses">
+        <div class="actionButtons">
+            <s:button id="addroomRates" 
+                   value="Add roomRates"
+                    view="/RoomRatesEdit.xhtml"
+             propagation="none">
+                 <f:param name="accomodationModeAccomodationModeId" 
+                         value="#{accomodationModeHome.instance.accomodationModeId}"/>
+                 <f:param name="roomRatesFrom" value="AccomodationMode"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

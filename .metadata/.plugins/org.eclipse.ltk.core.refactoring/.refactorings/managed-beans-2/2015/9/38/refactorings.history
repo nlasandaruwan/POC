@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;LanguageUtils.java&apos; to &apos;jsf-blank/src/org.test.jsf.util&apos;&#x0D;&#x0A;- Original project: &apos;managed-beans-2&apos;&#x0D;&#x0A;- Destination element: &apos;jsf-blank/src/org.test.jsf.util&apos;&#x0D;&#x0A;- Original element: &apos;coreservlets.LanguageUtils.java&apos;" description="Copy compilation unit" destination="=jsf-blank/src&lt;org.test.jsf.util" element1="/src&lt;coreservlets{LanguageUtils.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1442418730009" units="1" version="1.0"/>
+</session>

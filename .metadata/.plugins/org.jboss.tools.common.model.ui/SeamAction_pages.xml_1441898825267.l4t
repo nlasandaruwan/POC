@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Layout resource="/SeamAction/exploded-archives/SeamAction.war/WEB-INF/pages.xml">
+ <TreeFormPage>
+  <Memento type="FileSeamPages20">
+   <Memento type="Pages Configuration"/>
+   <Memento type="Advanced"/>
+  </Memento>
+ </TreeFormPage>
+</Layout>

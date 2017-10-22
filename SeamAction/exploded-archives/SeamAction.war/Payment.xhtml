@@ -1,0 +1,195 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+    
+    <rich:panel>
+        <f:facet name="header">Payment</f:facet>
+
+
+        <s:decorate id="paymentId" template="layout/display.xhtml">
+            <ui:define name="label">paymentId</ui:define>
+            #{paymentHome.instance.paymentId}
+        </s:decorate>
+
+
+        <s:decorate id="cardExpireMonth" template="layout/display.xhtml">
+            <ui:define name="label">cardExpireMonth</ui:define>
+            #{paymentHome.instance.cardExpireMonth}
+        </s:decorate>
+
+
+        <s:decorate id="cardExpireYear" template="layout/display.xhtml">
+            <ui:define name="label">cardExpireYear</ui:define>
+            #{paymentHome.instance.cardExpireYear}
+        </s:decorate>
+
+
+        <s:decorate id="cardHolderName" template="layout/display.xhtml">
+            <ui:define name="label">cardHolderName</ui:define>
+            #{paymentHome.instance.cardHolderName}
+        </s:decorate>
+
+
+        <s:decorate id="cardNumber" template="layout/display.xhtml">
+            <ui:define name="label">cardNumber</ui:define>
+            #{paymentHome.instance.cardNumber}
+        </s:decorate>
+
+
+        <s:decorate id="cardType" template="layout/display.xhtml">
+            <ui:define name="label">cardType</ui:define>
+            #{paymentHome.instance.cardType}
+        </s:decorate>
+
+
+        <s:decorate id="email" template="layout/display.xhtml">
+            <ui:define name="label">email</ui:define>
+            #{paymentHome.instance.email}
+        </s:decorate>
+
+
+        <s:decorate id="paymentAmount" template="layout/display.xhtml">
+            <ui:define name="label">paymentAmount</ui:define>
+            #{paymentHome.instance.paymentAmount}
+        </s:decorate>
+
+
+        <s:decorate id="paymentDate" template="layout/display.xhtml">
+            <ui:define name="label">paymentDate</ui:define>
+            <h:outputText value="#{paymentHome.instance.paymentDate}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <div style="clear:both"/>
+        
+    </rich:panel>
+    
+    <div class="actionButtons">      
+
+        <s:button view="/PaymentEdit.xhtml" 
+                    id="edit" 
+                 value="Edit"/>
+
+        <s:button view="/#{empty paymentFrom ? 'PaymentList' : paymentFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab label="reservations">
+    <div class="association" id="reservationsChildren">
+        
+        <h:outputText value="There are no reservations associated with this payment."
+                   rendered="#{empty paymentHome.reservations}"/>
+        
+        <rich:dataTable value="#{paymentHome.reservations}" 
+                       var="reservation" 
+                  rendered="#{not empty paymentHome.reservations}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="reservationsTable">
+            <h:column>
+                <f:facet name="header">reservationId</f:facet>
+                <h:outputText value="#{reservation.reservationId}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">adults</f:facet>
+                <h:outputText value="#{reservation.adults}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">airportPickup</f:facet>
+                <h:outputText value="#{reservation.airportPickup}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">arrivalFrom</f:facet>
+                <h:outputText value="#{reservation.arrivalFrom}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">arriveFor</f:facet>
+                <h:outputText value="#{reservation.arriveFor}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">children</f:facet>
+                <h:outputText value="#{reservation.children}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">fromDate</f:facet>
+                <h:outputText value="#{reservation.fromDate}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">leaveAfter</f:facet>
+                <h:outputText value="#{reservation.leaveAfter}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">nationality</f:facet>
+                <h:outputText value="#{reservation.nationality}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">noofRooms</f:facet>
+                <h:outputText value="#{reservation.noofRooms}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">reservationStatus</f:facet>
+                <h:outputText value="#{reservation.reservationStatus}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">roomCategory</f:facet>
+                <h:outputText value="#{reservation.roomCategory}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">roomCategoryId</f:facet>
+                <h:outputText value="#{reservation.roomCategoryId}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">roomType</f:facet>
+                <h:outputText value="#{reservation.roomType}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">roomTypeId</f:facet>
+                <h:outputText value="#{reservation.roomTypeId}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">toDate</f:facet>
+                <h:outputText value="#{reservation.toDate}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">action</f:facet>
+                <s:link id="selectreservation" 
+                     value="Select" 
+                      view="/Reservation.xhtml">
+                    <f:param name="reservationReservationId" 
+                            value="#{reservation.reservationId}"/>
+                    <f:param name="reservationFrom" value="Payment"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+        
+    </div>
+    
+    <div class="actionButtons">
+        <s:button 
+               value="Add reservation"
+                view="/ReservationEdit.xhtml">
+            <f:param name="paymentPaymentId" 
+                    value="#{paymentHome.instance.paymentId}"/>
+            <f:param name="reservationFrom" value="Payment"/>
+        </s:button>
+    </div>        
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/main-template.xhtml">
+
+<ui:define name="content">
+<fieldset>
+<legend>Navigate in Flow 1</legend>
+<h:form>
+<ul>
+  <li><h:commandButton value="Page 1" action="flow1"/><br/>
+      First page in flow (implicit flow start page).</li>
+  <li><h:commandButton value="Page 2" action="page2"/><br/>
+      Second page in flow (implicit flow navigation).</li>
+  <li><h:commandButton value="Page 3" action="page3"/><br/>
+      Third page in flow (implicit flow navigation).</li>
+  <li><h:commandButton value="Return Page" action="flow1-return"/><br/>
+      Page outside flow (implicit flow return page).</li>
+  <li><h:commandButton value="Home Page (FAILS)" action="home"/><br/>
+      Pages outside flow cannot be reached by using JSF outcomes, 
+      even if you explicitly map the outcomes in faces-config.xml.
+      However, although this is properly enforced by Glassfish 4,
+      it is not enforced by Tomcat when CDI is added via Weld 2.0.2.</li>
+  <li><a href="#{request.contextPath}/index.jsf">Home Page (SUCCEEDS)</a><br/>
+      However, of course it still works to use a a regular hypertext link 
+      to pages outside the flow.</li>
+</ul>
+</h:form>
+</fieldset>
+</ui:define>
+
+</ui:composition>

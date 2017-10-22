@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/main-template.xhtml">
+
+<ui:define name="title">Nested Flow Start Page</ui:define>
+
+<ui:define name="content">
+<fieldset>
+<legend>Configuring Nested Flows in Java Code</legend>
+<h:form>
+<h:messages globalOnly="true" styleClass="error"/>
+<h:panelGrid columns="3" styleClass="formTable">
+  Param 3: 
+  <h:inputText value="#{javaNestedFlowBean.param3}" id="param3"
+               required="true"
+               requiredMessage="Param 3 is required"/>
+  <h:message for="param1" styleClass="error"/>
+  
+  Param 4: 
+  <h:inputText value="#{javaNestedFlowBean.param4}" id="param4"
+               required="true"
+               requiredMessage="Param 4 is required"/>
+  <h:message for="param4" styleClass="error"/>
+  
+  <f:facet name="footer">
+    <h:commandButton value="Show Results"
+                     action="#{javaNestedFlowBean.doFlow}"/><br/>
+  </f:facet>
+</h:panelGrid>
+
+</h:form>
+</fieldset>
+</ui:define>
+  
+</ui:composition>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+  <!-- Regardless of the fact that "home" is defined as a wildcard,
+       the outcome "home" does NOT work from nested flows. Nested
+       flows can only use outcomes that are specifically designed
+       for the flow: either by the conventions, an XML file, or a flow builder
+       Java class. This is properly enforced in Glassfish 4, but is NOT
+       correctly enforced in Tomcat with CDI added via Weld. -->
+  <navigation-rule>
+    <from-view-id>*</from-view-id>
+    <navigation-case>
+      <from-outcome>home</from-outcome>
+      <to-view-id>/index.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  
+  <!-- It is generally preferred to configure the flow by using
+       flowname-flow.xml in the flow directory. However, it is perfectly
+       legal to do so in the main faces-config.xml file. -->
+  <flow-definition id="fourth-flow">
+    <start-node>startPage</start-node>
+    <view id="startPage">
+      <vdl-document>/flow4/a.xhtml</vdl-document>
+    </view> 
+    <view id="confirmation1">
+      <vdl-document>/flow4/b.xhtml</vdl-document>
+    </view> 
+    <view id="confirmation2">
+      <vdl-document>/flow4/c.xhtml</vdl-document>
+    </view> 
+    <flow-return id="return-from-flow4">
+      <from-outcome>/return-page-for-flow4</from-outcome>
+    </flow-return>
+    <flow-return id="go-home">
+      <from-outcome>/index</from-outcome>
+    </flow-return>
+  </flow-definition>
+</faces-config>

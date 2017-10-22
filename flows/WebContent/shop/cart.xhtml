@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/main-template.xhtml">
+
+<ui:define name="title">Your Cart</ui:define>
+
+<ui:define name="content">
+<h:panelGrid columns="4" styleClass="cartTable">
+  <h:outputText value="Book"/>
+  <h:outputText value="Price"/>
+  <h:outputText value="Number"/>
+  <h:outputText value="Total Cost"/>
+
+  <h:outputText value="#{bookFlowBean.special1.title}"/>
+  <h:outputText value="#{bookFlowBean.special1.dollars}"/>
+  <h:outputText value="#{bookFlowBean.special1.orders}"/>
+  <h:outputText value="#{bookFlowBean.special1.totalDollars}"/>
+  
+  <h:outputText value="#{bookFlowBean.special2.title}"/>
+  <h:outputText value="#{bookFlowBean.special2.dollars}"/>
+  <h:outputText value="#{bookFlowBean.special2.orders}"/>
+  <h:outputText value="#{bookFlowBean.special2.totalDollars}"/>
+  
+  <h:outputText value=""/>
+  <h:outputText value=""/>
+  <h:outputText value=""/>
+  <h:outputText value="#{bookFlowBean.totalDollars}"/>
+</h:panelGrid>
+
+<h:form>
+  <h:commandButton value="Check Out" action="callCheckout"/>
+  <h:commandButton value="Cancel Shopping" action="shop-return"/>
+</h:form>
+</ui:define>
+  
+</ui:composition>

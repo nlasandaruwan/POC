@@ -1,0 +1,192 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    <h:form id="roomPool" styleClass="edit">
+    
+        <rich:panel>
+            <f:facet name="header">#{roomPoolHome.managed ? 'Edit' : 'Add'} RoomPool</f:facet>
+
+
+            <s:decorate id="roomPoolIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">roomPoolId</ui:define>
+                <h:inputText id="roomPoolId"
+                       required="true"
+                       disabled="#{roomPoolHome.managed}"
+                          value="#{roomPoolHome.instance.roomPoolId}">
+                    <a:support event="onblur" reRender="roomPoolIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="availableRoomsDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">availableRooms</ui:define>
+                <h:inputText id="availableRooms"
+                          value="#{roomPoolHome.instance.availableRooms}">
+                    <a:support event="onblur" reRender="availableRoomsDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+
+
+            <s:decorate id="totalNoofRoomsDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">totalNoofRooms</ui:define>
+                <h:inputText id="totalNoofRooms"
+                          value="#{roomPoolHome.instance.totalNoofRooms}">
+                    <a:support event="onblur" reRender="totalNoofRoomsDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+        </rich:panel>
+                
+        <div class="actionButtons">
+
+            <h:commandButton id="save" 
+                          value="Save" 
+                         action="#{roomPoolHome.persist}"
+                       disabled="#{!roomPoolHome.wired}"
+                       rendered="#{!roomPoolHome.managed}"/>  
+                          			  
+            <h:commandButton id="update" 
+                          value="Save" 
+                         action="#{roomPoolHome.update}"
+                       rendered="#{roomPoolHome.managed}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{roomPoolHome.remove}"
+                      immediate="true"
+                       rendered="#{roomPoolHome.managed}"/>
+                    
+            <s:button id="done" 
+                   value="Done"
+             propagation="end"
+                    view="/RoomPool.xhtml"
+                rendered="#{roomPoolHome.managed}"/>
+                
+            <s:button id="cancel" 
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty roomPoolFrom ? 'RoomPoolList' : roomPoolFrom}.xhtml"
+                rendered="#{!roomPoolHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+    
+    <rich:tab label="roomCategory *" labelClass="required">
+    <div class="association" id="roomCategoryParent">
+    
+        <h:outputText value="There is no roomCategory associated with this roomPool." 
+                   rendered="#{roomPoolHome.instance.roomCategory == null}"/>
+        
+        <rich:dataTable var="roomCategory" 
+                   value="#{roomPoolHome.instance.roomCategory}" 
+                rendered="#{roomPoolHome.instance.roomCategory != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="roomCategoryTable">
+            <h:column>
+                <f:facet name="header">roomCategoryId</f:facet>
+                #{roomCategory.roomCategoryId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">description</f:facet>
+                #{roomCategory.description}
+            </h:column>
+            <h:column>
+                <f:facet name="header">imageName</f:facet>
+                #{roomCategory.imageName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">roomCategotyType</f:facet>
+                #{roomCategory.roomCategotyType}
+            </h:column>
+            <h:column>
+                <f:facet name="header">action</f:facet>
+                <s:link view="/RoomCategory.xhtml" 
+                         id="viewroomCategory" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="roomCategoryRoomCategoryId" 
+                           value="#{roomCategory.roomCategoryId}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button value="Select roomCategory"
+                       view="/RoomCategoryList.xhtml">
+                <f:param name="from" value="RoomPoolEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </rich:tab>
+    
+    <rich:tab label="roomType *" labelClass="required">
+    <div class="association" id="roomTypeParent">
+    
+        <h:outputText value="There is no roomType associated with this roomPool." 
+                   rendered="#{roomPoolHome.instance.roomType == null}"/>
+        
+        <rich:dataTable var="roomType" 
+                   value="#{roomPoolHome.instance.roomType}" 
+                rendered="#{roomPoolHome.instance.roomType != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="roomTypeTable">
+            <h:column>
+                <f:facet name="header">roomTypeId</f:facet>
+                #{roomType.roomTypeId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">description</f:facet>
+                #{roomType.description}
+            </h:column>
+            <h:column>
+                <f:facet name="header">roomType</f:facet>
+                #{roomType.roomType}
+            </h:column>
+            <h:column>
+                <f:facet name="header">action</f:facet>
+                <s:link view="/RoomType.xhtml" 
+                         id="viewroomType" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="roomTypeRoomTypeId" 
+                           value="#{roomType.roomTypeId}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button value="Select roomType"
+                       view="/RoomTypeList.xhtml">
+                <f:param name="from" value="RoomPoolEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Choose Color</title>
+	<link href="./css/styles.css" rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
+	<h1 class="title">Choose Color</h1>
+	<h3>#{applicationScopeMessage.message}</h3>
+	<h3>#{sessionScopeMessage.message}</h3>
+	<h:form>
+		Choose Color 1 String Array:<br />
+		<h:selectOneMenu value="#{selectOneColors1.color1}">
+			<f:selectItems value="#{selectOneColorOptions.colorNamesArr}" />
+		</h:selectOneMenu>
+		
+		<br /><br /><br />
+		
+		Choose Color 2 List:<br />
+		<h:selectOneListbox value="#{selectOneColors1.color2}">
+			<f:selectItems value="#{selectOneColorOptions.colorNamesList}" />
+		</h:selectOneListbox>
+		
+		<br /><br /><br />
+		
+		Choose Color 3 Map:<br />
+		<h:selectOneRadio value="#{selectOneColors1.color3}">
+			<f:selectItems value="#{selectOneColorOptions.colorNameMap}" />
+		</h:selectOneRadio>
+		
+		<br /><br /><br />
+		
+		Choose Color 4 List Color :<br />
+		<h:selectOneListbox value="#{selectOneColors1.color4}">
+			<f:selectItems value="#{selectOneColorOptions.colorList}" var="color"
+				itemLabel="#{color.colorName}" itemValue="#{color.colorValue}" />
+		</h:selectOneListbox>
+		
+		<br /><br /><br />
+		
+		<h:commandButton action="#{selectOneColors1.showColors}"
+			value="Show Selected Colors" />
+	</h:form>
+
+</h:body>
+</html>

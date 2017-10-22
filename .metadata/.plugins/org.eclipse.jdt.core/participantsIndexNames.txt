@@ -1,0 +1,5 @@
+INDEX VERSION 1.127
+A:\Java SW\eclipse_Luna_WS\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\69853354.index
+\Spring3MVC\src
+A:\Java SW\eclipse_Luna_WS\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\17521877.index
+\Spring3MVC\src

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="true" key="J2EE_EXPORT_OVERWRITE"/>
+	<item value="JSFEJBEAR" key="LASTEARNAME_"/>
+	<item value="false" key="J2EE_EXPORT_SOURCE"/>
+	<list key="J2EE_EXPORT_JST_WEB">
+		<item value="A:\Java SW\GlassFish\glassfish4\glassfish\domains\domain1\autodeploy\jsf-blank.war"/>
+		<item value="A:\Java SW\GlassFish\glassfish4\glassfish\domains\domain1\autodeploy\managed-beans-2-exercises.war"/>
+		<item value="A:\Java SW\Jboss\wildfly-9.0.1.Final\standalone\deployments\jsf-blank.war"/>
+		<item value="A:\Java SW\Jboss\jboss-as-web-7.0.2.Final\standalone\deployments\jsf-blank.war"/>
+		<item value="A:\GF_Deployments\JSFDemo.war"/>
+	</list>
+	<list key="MRU_RUNTIME_STORE">
+		<item value="JBoss 7.0 Runtime"/>
+	</list>
+</section>

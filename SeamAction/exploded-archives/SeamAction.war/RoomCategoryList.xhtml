@@ -1,0 +1,152 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+    
+    <h:form id="roomCategorySearch" styleClass="edit">
+    
+        <rich:simpleTogglePanel label="RoomCategory search parameters" switchType="ajax">
+        
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">description</ui:define>
+                <h:inputText id="description" value="#{roomCategoryList.roomCategory.description}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">imageName</ui:define>
+                <h:inputText id="imageName" value="#{roomCategoryList.roomCategory.imageName}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">roomCategotyType</ui:define>
+                <h:inputText id="roomCategotyType" value="#{roomCategoryList.roomCategory.roomCategotyType}"/>
+            </s:decorate>
+
+        
+        </rich:simpleTogglePanel>
+        
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/RoomCategoryList.xhtml"/>
+        </div>
+        
+    </h:form>
+    
+    <rich:panel>
+        <f:facet name="header">RoomCategory search results</f:facet>
+    <div class="results" id="roomCategoryList">
+
+    <h:outputText value="The roomCategory search returned no results." 
+               rendered="#{empty roomCategoryList.resultList}"/>
+               
+    <rich:dataTable id="roomCategoryList" 
+                var="roomCategory"
+              value="#{roomCategoryList.resultList}" 
+           rendered="#{not empty roomCategoryList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="roomCategoryId #{roomCategoryList.order=='roomCategoryId asc' ? messages.down : ( roomCategoryList.order=='roomCategoryId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{roomCategoryList.order=='roomCategoryId asc' ? 'roomCategoryId desc' : 'roomCategoryId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{roomCategory.roomCategoryId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="description #{roomCategoryList.order=='description asc' ? messages.down : ( roomCategoryList.order=='description desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{roomCategoryList.order=='description asc' ? 'description desc' : 'description asc'}"/>
+                </s:link>
+            </f:facet>
+            #{roomCategory.description}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="imageName #{roomCategoryList.order=='imageName asc' ? messages.down : ( roomCategoryList.order=='imageName desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{roomCategoryList.order=='imageName asc' ? 'imageName desc' : 'imageName asc'}"/>
+                </s:link>
+            </f:facet>
+            #{roomCategory.imageName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="roomCategotyType #{roomCategoryList.order=='roomCategotyType asc' ? messages.down : ( roomCategoryList.order=='roomCategotyType desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{roomCategoryList.order=='roomCategotyType asc' ? 'roomCategotyType desc' : 'roomCategotyType asc'}"/>
+                </s:link>
+            </f:facet>
+            #{roomCategory.roomCategotyType}
+        </h:column>
+        <h:column>
+            <f:facet name="header">action</f:facet>
+            <s:link view="/#{empty from ? 'RoomCategory' : from}.xhtml" 
+                   value="Select" 
+                      id="roomCategory">
+                <f:param name="roomCategoryRoomCategoryId" 
+                        value="#{roomCategory.roomCategoryId}"/>
+            </s:link>
+        </h:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+    
+    <div class="tableControl">
+      
+        <s:link view="/RoomCategoryList.xhtml" 
+            rendered="#{roomCategoryList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/RoomCategoryList.xhtml" 
+            rendered="#{roomCategoryList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult" 
+                    value="#{roomCategoryList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/RoomCategoryList.xhtml" 
+            rendered="#{roomCategoryList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult" 
+                    value="#{roomCategoryList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/RoomCategoryList.xhtml" 
+            rendered="#{roomCategoryList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult" 
+                    value="#{roomCategoryList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/RoomCategoryEdit.xhtml"
+                    id="create" 
+                 value="Create roomCategory">
+            <f:param name="roomCategoryRoomCategoryId"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

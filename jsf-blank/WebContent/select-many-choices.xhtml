@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Choose Many Color</title>
+	<link href="./css/styles.css" rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
+	<h1 class="title">Choose Many Color</h1>
+	<h3>#{applicationScopeMessage.message}</h3>
+	<h3>#{sessionScopeMessage.message}</h3>
+	<h:form>
+		Choose Color 1 String Array:<br />
+		<h:selectManyMenu value="#{selectManyColorOptions.color1}">
+			<f:selectItems value="#{selectManyColorOptions.colorNamesArr}" />
+		</h:selectManyMenu>
+		
+		<br /><br /><br />
+		
+		 Choose Color 2 List:<br />
+		<h:selectManyListbox value="#{selectManyColorOptions.color2}">
+			<f:selectItems value="#{selectManyColorOptions.colorNamesList}" />
+		</h:selectManyListbox>
+		
+		<br /><br /><br />
+		
+		Choose Color 3 Map:<br />
+		<h:selectOneRadio value="#{selectManyColorOptions.color3}">
+			<f:selectItems value="#{selectManyColorOptions.colorNameMap}" />
+		</h:selectOneRadio>
+		
+		<br /><br /><br />
+		
+		Choose Color 4 List Color :<br />
+		<h:selectManyListbox value="#{selectManyColorOptions.color4}">
+			<f:selectItems value="#{selectManyColorOptions.colorList}" var="color"
+				itemLabel="#{color.colorName}" itemValue="#{color.colorValue}" />
+		</h:selectManyListbox>
+		
+		<br /><br /><br />
+		
+		<h:commandButton action="#{selectManyColorOptions.showColors}"
+			value="Show Selected Colors" />
+	</h:form>
+
+</h:body>
+</html>

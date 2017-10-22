@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+	<!-- Empty for now. There are many uses for faces-config.xml, but the most 
+		common are navigation rules (instead of having the return value of the "action" 
+		method be the base filename), bean declarations (instead of using @ManagedBean), 
+		and properties files (aka resource bundles). If you are not using faces-config.xml, 
+		it is perfectly legal to omit the file entirely. But, most people prefer 
+		to have a blank one already in their project for later use. From JSF 2 and 
+		PrimeFaces tutorial at http://www.coreservlets.com/JSF-Tutorial/jsf2/ -->
+
+	<managed-bean>
+		<managed-bean-name>fConfigHandler</managed-bean-name>
+		<managed-bean-class>org.test.jsf.mBean.fConfig.RandomPageLoaderBeanfConfig</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<navigation-rule>
+		<from-view-id>/choose-language-fConfig.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>/WEB-INF/view/fConfig/Page1</from-outcome>
+			<to-view-id>/WEB-INF/view/fConfig/Page1.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>/WEB-INF/view/fConfig/Page2</from-outcome>
+			<to-view-id>/WEB-INF/view/fConfig/Page2.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>/WEB-INF/view/fConfig/Page3</from-outcome>
+			<to-view-id>/WEB-INF/view/fConfig/Page3.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>*</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>

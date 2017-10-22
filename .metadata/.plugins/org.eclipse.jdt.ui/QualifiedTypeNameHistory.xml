@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.hibernate.validator.NotNull"/>
+<fullyQualifiedTypeName name="org.hibernate.validator.Max"/>
+<fullyQualifiedTypeName name="org.hibernate.validator.Min"/>
+<fullyQualifiedTypeName name="org.hibernate.validator.Length"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="org.test.jsf.util.RandomUtils"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="org.test.jsf.service.CustomerLookupService"/>
+<fullyQualifiedTypeName name="org.test.jsf.domain.Customer"/>
+<fullyQualifiedTypeName name="org.test.jsf.domain.Color"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.StringBuffer"/>
+<fullyQualifiedTypeName name="org.test.jsf.mBean.SelectOneColors1"/>
+<fullyQualifiedTypeName name="org.test.jsf.mBean.SelectOneColors2"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.test.jsf.util.LanguageUtils"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="javax.faces.bean.SessionScoped"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="org.test.jsf.mBean.BankingBean"/>
+<fullyQualifiedTypeName name="javax.faces.bean.ManagedProperty"/>
+<fullyQualifiedTypeName name="org.test.jsf.service.CustomerSimpleMap"/>
+<fullyQualifiedTypeName name="javax.faces.bean.ManagedBean"/>
+<fullyQualifiedTypeName name="org.test.jsf.service.CustomerSimpleMapDI"/>
+<fullyQualifiedTypeName name="javax.faces.bean.ApplicationScoped"/>
+<fullyQualifiedTypeName name="org.test.jsf.mBean.RandomPageLoaderBean"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="test.Balloon"/>
+<fullyQualifiedTypeName name="java.lang.Runnable"/>
+<fullyQualifiedTypeName name="com.runable.MyRunnable"/>
+<fullyQualifiedTypeName name="com.runable.MyRunnable2"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,138 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+    
+    <h:form id="roomTypeSearch" styleClass="edit">
+    
+        <rich:simpleTogglePanel label="RoomType search parameters" switchType="ajax">
+        
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">description</ui:define>
+                <h:inputText id="description" value="#{roomTypeList.roomType.description}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">roomType</ui:define>
+                <h:inputText id="roomType" value="#{roomTypeList.roomType.roomType}"/>
+            </s:decorate>
+
+        
+        </rich:simpleTogglePanel>
+        
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/RoomTypeList.xhtml"/>
+        </div>
+        
+    </h:form>
+    
+    <rich:panel>
+        <f:facet name="header">RoomType search results</f:facet>
+    <div class="results" id="roomTypeList">
+
+    <h:outputText value="The roomType search returned no results." 
+               rendered="#{empty roomTypeList.resultList}"/>
+               
+    <rich:dataTable id="roomTypeList" 
+                var="roomType"
+              value="#{roomTypeList.resultList}" 
+           rendered="#{not empty roomTypeList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="roomTypeId #{roomTypeList.order=='roomTypeId asc' ? messages.down : ( roomTypeList.order=='roomTypeId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{roomTypeList.order=='roomTypeId asc' ? 'roomTypeId desc' : 'roomTypeId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{roomType.roomTypeId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="description #{roomTypeList.order=='description asc' ? messages.down : ( roomTypeList.order=='description desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{roomTypeList.order=='description asc' ? 'description desc' : 'description asc'}"/>
+                </s:link>
+            </f:facet>
+            #{roomType.description}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="roomType #{roomTypeList.order=='roomType asc' ? messages.down : ( roomTypeList.order=='roomType desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{roomTypeList.order=='roomType asc' ? 'roomType desc' : 'roomType asc'}"/>
+                </s:link>
+            </f:facet>
+            #{roomType.roomType}
+        </h:column>
+        <h:column>
+            <f:facet name="header">action</f:facet>
+            <s:link view="/#{empty from ? 'RoomType' : from}.xhtml" 
+                   value="Select" 
+                      id="roomType">
+                <f:param name="roomTypeRoomTypeId" 
+                        value="#{roomType.roomTypeId}"/>
+            </s:link>
+        </h:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+    
+    <div class="tableControl">
+      
+        <s:link view="/RoomTypeList.xhtml" 
+            rendered="#{roomTypeList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/RoomTypeList.xhtml" 
+            rendered="#{roomTypeList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult" 
+                    value="#{roomTypeList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/RoomTypeList.xhtml" 
+            rendered="#{roomTypeList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult" 
+                    value="#{roomTypeList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/RoomTypeList.xhtml" 
+            rendered="#{roomTypeList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult" 
+                    value="#{roomTypeList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/RoomTypeEdit.xhtml"
+                    id="create" 
+                 value="Create roomType">
+            <f:param name="roomTypeRoomTypeId"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

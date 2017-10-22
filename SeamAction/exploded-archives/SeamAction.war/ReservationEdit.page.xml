@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+      no-conversation-view-id="/ReservationList.xhtml"
+      login-required="true">
+   
+   <begin-conversation join="true"/>
+   
+   <action execute="#{reservationHome.wire}"/>
+   
+   <param name="reservationFrom"/>
+   <param name="reservationReservationId" value="#{reservationHome.reservationReservationId}"/>
+   <param name="accomodationModeFrom"/>
+   <param name="accomodationModeAccomodationModeId" value="#{accomodationModeHome.accomodationModeAccomodationModeId}"/>
+
+   <param name="customerFrom"/>
+   <param name="customerCustomerId" value="#{customerHome.customerCustomerId}"/>
+   <param name="privilageFrom"/>
+   <param name="privilagePrivilageId" value="#{privilageHome.privilagePrivilageId}"/>
+
+
+   <param name="paymentFrom"/>
+   <param name="paymentPaymentId" value="#{paymentHome.paymentPaymentId}"/>
+
+
+
+   <navigation from-action="#{reservationHome.persist}">
+       <end-conversation/>
+       <redirect view-id="/Reservation.xhtml"/>
+   </navigation>
+   
+   <navigation from-action="#{reservationHome.update}">
+       <end-conversation/>
+       <redirect view-id="/Reservation.xhtml"/>
+   </navigation>
+   
+   <navigation from-action="#{reservationHome.remove}">
+       <end-conversation/>
+       <redirect view-id="/ReservationList.xhtml"/>
+   </navigation>
+   
+</page>

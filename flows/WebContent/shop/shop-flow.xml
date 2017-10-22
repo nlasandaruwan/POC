@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+
+  <flow-definition id="shop">
+    <flow-return id="shop-return">
+      <from-outcome>/shop-return-page</from-outcome>
+    </flow-return>
+    <!-- This means the outcome "callCheckout" invokes
+         the checkout flow as a nested flow.  -->
+    <flow-call id="callCheckout">
+      <flow-reference>
+        <flow-id>checkout</flow-id>
+      </flow-reference>
+      <!-- This means that when you call to the nested flow, the 
+           current value of bookFlowBean.special1.orders
+           is stored into flowScope.special1Orders. 
+           The checkout flow needs an inbound-parameter to
+           say where flowScope.special1Orders should go. -->
+      <outbound-parameter>
+        <name>special1Orders</name>
+        <value>#{bookFlowBean.special1.orders}</value>
+      </outbound-parameter>
+      <!-- This means that when you call to the nested flow, the 
+           current value of bookFlowBean.special2.orders
+           is stored into flowScope.special2Orders. 
+           The checkout flow needs an inbound-parameter to
+           say where flowScope.special2Orders should go. -->
+      <outbound-parameter>
+        <name>special2Orders</name>
+        <value>#{bookFlowBean.special2.orders}</value>
+      </outbound-parameter>
+    </flow-call>
+  </flow-definition>
+
+</faces-config>

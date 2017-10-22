@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/main-template.xhtml">
+
+<ui:define name="title">Thanks for Your Order</ui:define>
+
+<ui:define name="content">
+<h2>Thank you, #{checkoutFlowBean.name}.<br/>
+    #{checkoutFlowBean.totalDollars} was charged to your card.<br/>
+    Confirmation has been sent to #{checkoutFlowBean.email}.
+</h2>
+<br/>
+<div align="center">
+<h:form>
+  <h:commandButton value="Exit" action="exit"
+                   style="font-size: 200%"/>
+</h:form>
+</div>
+</ui:define>
+  
+</ui:composition>

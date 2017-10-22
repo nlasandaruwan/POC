@@ -1,0 +1,12 @@
+package com.runable;
+
+public class MyRunnable2 implements Runnable{
+
+	@Override
+	public void run() {
+		for (int x = 1; x <= 40; x++) {
+			System.out.println("Run by MyRunnable2 : " + Thread.currentThread().getName()+ ", x is " + x);
+		}
+	}
+
+}

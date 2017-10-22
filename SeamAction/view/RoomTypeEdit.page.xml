@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+      no-conversation-view-id="/RoomTypeList.xhtml"
+      login-required="true">
+   
+   <begin-conversation join="true"/>
+   
+   <action execute="#{roomTypeHome.wire}"/>
+   
+   <param name="roomTypeFrom"/>
+   <param name="roomTypeRoomTypeId" value="#{roomTypeHome.roomTypeRoomTypeId}"/>
+
+
+   <navigation from-action="#{roomTypeHome.persist}">
+       <end-conversation/>
+       <redirect view-id="/RoomType.xhtml"/>
+   </navigation>
+   
+   <navigation from-action="#{roomTypeHome.update}">
+       <end-conversation/>
+       <redirect view-id="/RoomType.xhtml"/>
+   </navigation>
+   
+   <navigation from-action="#{roomTypeHome.remove}">
+       <end-conversation/>
+       <redirect view-id="/RoomTypeList.xhtml"/>
+   </navigation>
+   
+</page>

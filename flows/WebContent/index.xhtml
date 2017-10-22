@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/main-template.xhtml">
+
+<ui:define name="title">Home Page (Outside Flow)</ui:define>
+
+<ui:define name="content">
+<h:form>
+<ul>
+  <li><h:commandLink value="Flow 1." action="flow1"/>
+      Flow 1 uses simple implicit navigation, and has no flow-scoped
+      beans or properties. It has an empty flow-configuration file.</li>
+  <li><h:commandLink value="Flow 2." action="flow2"/>
+      Flow 2 uses flow-scoped beans and properties. 
+      It still uses simple implicit navigation, and
+      has an empty flow-configuration file.</li>
+  <li><h:commandLink value="Flow 3." action="flow3"/>
+      Flow 3 configures the flow with an XML file in the flow directory.</li>
+  <li><h:commandLink value="Flow 4." action="fourth-flow"/>
+      Flow 4 configures the flow with the main faces-config.xml file.</li>
+  <li><h:commandLink value="Today's Specials." action="shop"/>
+      The "shop" flow links to the nested "checkout" flow and passes
+      parameters to it. It configures the flow with an XML file 
+      in the flow directory.</li>
+   <li><h:commandLink value="Java Flow 1." action="firstJavaFlow"/>
+      The first Java flow uses simple Java-based configuration.</li>
+   <li><h:commandLink value="Java Flow 2." action="secondJavaFlow"/>
+      The second Java flow uses Java-based configuration
+      to send parameters to nested flows.</li>
+</ul>
+</h:form>
+</ui:define>
+  
+</ui:composition>

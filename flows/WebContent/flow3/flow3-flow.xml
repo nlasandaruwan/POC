@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+
+  <flow-definition id="flow3">
+    <!-- start-node is optional. Defaults to flowname.xhtml -->
+    <start-node>startPage</start-node>
+    <view id="startPage">
+      <vdl-document>/flow3/flow3-starting-page.xhtml</vdl-document>
+    </view> 
+    <!-- At least one flow-return is required. The default outcome of /flowname-return.xhtml
+         goes away once you have a non-empty flowname-flow.xml file. -->
+    <flow-return id="return-from-flow3">
+      <from-outcome>/return-page-for-flow3</from-outcome>
+    </flow-return>
+    <flow-return id="go-home">
+      <from-outcome>/index</from-outcome>
+    </flow-return>
+    
+    <!-- A switch lets you use the expression language to choose
+         the final page for a given outcome. Here, the outcome is
+         "confirm", but the results page could be any of three
+         choices. In most cases, it is better to do this type of
+         conditional logic in Java (returning different outcomes from 
+         the action controller method, with each outcome corresponding
+         1-to-1 to a results page). However, if the test is based
+         on a DIFFERENT bean, it is perhaps justifiable to do it in the 
+         XML file instead of in the Java code. 
+    -->
+    <switch id="confirm">
+      <case>
+        <if>#{flow3HitCountBean.currentCount eq 1}</if>
+        <from-outcome>confirmation3</from-outcome>
+      </case>
+      <case>
+        <if>#{flow3HitCountBean.currentCount lt 5}</if>
+        <from-outcome>confirmation4</from-outcome>
+      </case>
+      <default-outcome>confirmation5</default-outcome>
+    </switch>
+    
+    <!-- The views are optional. They map ids to pages, but the
+         default of id.xhtml still works. For example, there is no
+         mapping for "confirmation2", but that outcome still results in
+         /flow3/confirmation.xhtml. However, in real life, it is probably best
+         to either map all the pages or use defaults for all of the pages, 
+         not to map some of them (confirmation1, confirmation2), but not 
+         the others (confirmation2, confirmation4, confirmation5), as
+         is done here for the sake of illustration.
+    -->
+    <view id="confirmation1">
+      <vdl-document>/flow3/confirmation-page-1.xhtml</vdl-document>
+    </view> 
+    <view id="confirmation3">
+      <vdl-document>/flow3/confirmation-page-3.xhtml</vdl-document>
+    </view> 
+    
+  </flow-definition>
+
+</faces-config>

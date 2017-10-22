@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd"
+      no-conversation-view-id="/PrivilageList.xhtml"
+      login-required="true">
+   
+   <begin-conversation join="true"/>
+   
+   <action execute="#{privilageHome.wire}"/>
+   
+   <param name="privilageFrom"/>
+   <param name="privilagePrivilageId" value="#{privilageHome.privilagePrivilageId}"/>
+
+
+   <navigation from-action="#{privilageHome.persist}">
+       <end-conversation/>
+       <redirect view-id="/Privilage.xhtml"/>
+   </navigation>
+   
+   <navigation from-action="#{privilageHome.update}">
+       <end-conversation/>
+       <redirect view-id="/Privilage.xhtml"/>
+   </navigation>
+   
+   <navigation from-action="#{privilageHome.remove}">
+       <end-conversation/>
+       <redirect view-id="/PrivilageList.xhtml"/>
+   </navigation>
+   
+</page>

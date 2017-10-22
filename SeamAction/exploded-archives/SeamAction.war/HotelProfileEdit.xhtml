@@ -1,0 +1,193 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    <h:form id="hotelProfile" styleClass="edit">
+    
+        <rich:panel>
+            <f:facet name="header">#{hotelProfileHome.managed ? 'Edit' : 'Add'} HotelProfile</f:facet>
+
+
+            <s:decorate id="profileIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">profileId</ui:define>
+                <h:inputText id="profileId"
+                       required="true"
+                       disabled="#{hotelProfileHome.managed}"
+                          value="#{hotelProfileHome.instance.profileId}">
+                    <a:support event="onblur" reRender="profileIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="address1Decoration" template="layout/edit.xhtml">
+                <ui:define name="label">address1</ui:define>
+                <h:inputTextarea id="address1"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.address1}"/>
+            </s:decorate>
+
+
+            <s:decorate id="address2Decoration" template="layout/edit.xhtml">
+                <ui:define name="label">address2</ui:define>
+                <h:inputTextarea id="address2"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.address2}"/>
+            </s:decorate>
+
+
+            <s:decorate id="cityDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">city</ui:define>
+                <h:inputTextarea id="city"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.city}"/>
+            </s:decorate>
+
+
+            <s:decorate id="contactNumber1Decoration" template="layout/edit.xhtml">
+                <ui:define name="label">contactNumber1</ui:define>
+                <h:inputTextarea id="contactNumber1"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.contactNumber1}"/>
+            </s:decorate>
+
+
+            <s:decorate id="contactNumber2Decoration" template="layout/edit.xhtml">
+                <ui:define name="label">contactNumber2</ui:define>
+                <h:inputTextarea id="contactNumber2"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.contactNumber2}"/>
+            </s:decorate>
+
+
+            <s:decorate id="countryDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">country</ui:define>
+                <h:inputTextarea id="country"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.country}"/>
+            </s:decorate>
+
+
+            <s:decorate id="directionDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">direction</ui:define>
+                <h:inputTextarea id="direction"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.direction}"/>
+            </s:decorate>
+
+
+            <s:decorate id="emailDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">email</ui:define>
+                <h:inputTextarea id="email"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.email}"/>
+            </s:decorate>
+
+
+            <s:decorate id="faxDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">fax</ui:define>
+                <h:inputTextarea id="fax"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.fax}"/>
+            </s:decorate>
+
+
+            <s:decorate id="hotelDescriptionDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">hotelDescription</ui:define>
+                <h:inputTextarea id="hotelDescription"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.hotelDescription}"/>
+            </s:decorate>
+
+
+            <s:decorate id="hotelNameDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">hotelName</ui:define>
+                <h:inputTextarea id="hotelName"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.hotelName}"/>
+            </s:decorate>
+
+
+            <s:decorate id="otherWebsDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">otherWebs</ui:define>
+                <h:inputTextarea id="otherWebs"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.otherWebs}"/>
+            </s:decorate>
+
+
+            <s:decorate id="postalCodeDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">postalCode</ui:define>
+                <h:inputTextarea id="postalCode"
+                               cols="80"
+                               rows="3"
+                              value="#{hotelProfileHome.instance.postalCode}"/>
+            </s:decorate>
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+        </rich:panel>
+                
+        <div class="actionButtons">
+
+            <h:commandButton id="save" 
+                          value="Save" 
+                         action="#{hotelProfileHome.persist}"
+                       disabled="#{!hotelProfileHome.wired}"
+                       rendered="#{!hotelProfileHome.managed}"/>  
+                          			  
+            <h:commandButton id="update" 
+                          value="Save" 
+                         action="#{hotelProfileHome.update}"
+                       rendered="#{hotelProfileHome.managed}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{hotelProfileHome.remove}"
+                      immediate="true"
+                       rendered="#{hotelProfileHome.managed}"/>
+                    
+            <s:button id="done" 
+                   value="Done"
+             propagation="end"
+                    view="/HotelProfile.xhtml"
+                rendered="#{hotelProfileHome.managed}"/>
+                
+            <s:button id="cancel" 
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty hotelProfileFrom ? 'HotelProfileList' : hotelProfileFrom}.xhtml"
+                rendered="#{!hotelProfileHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

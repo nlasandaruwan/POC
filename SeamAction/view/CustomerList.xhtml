@@ -1,0 +1,357 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+    
+    <h:form id="customerSearch" styleClass="edit">
+    
+        <rich:simpleTogglePanel label="Customer search parameters" switchType="ajax">
+        
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">address1</ui:define>
+                <h:inputText id="address1" value="#{customerList.customer.address1}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">address2</ui:define>
+                <h:inputText id="address2" value="#{customerList.customer.address2}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">contactLand</ui:define>
+                <h:inputText id="contactLand" value="#{customerList.customer.contactLand}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">contactMobile</ui:define>
+                <h:inputText id="contactMobile" value="#{customerList.customer.contactMobile}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">country</ui:define>
+                <h:inputText id="country" value="#{customerList.customer.country}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">email</ui:define>
+                <h:inputText id="email" value="#{customerList.customer.email}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">firstName</ui:define>
+                <h:inputText id="firstName" value="#{customerList.customer.firstName}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">lastName</ui:define>
+                <h:inputText id="lastName" value="#{customerList.customer.lastName}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">nicPassportNo</ui:define>
+                <h:inputText id="nicPassportNo" value="#{customerList.customer.nicPassportNo}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">password</ui:define>
+                <h:inputText id="password" value="#{customerList.customer.password}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">passwordRecoverAnswer</ui:define>
+                <h:inputText id="passwordRecoverAnswer" value="#{customerList.customer.passwordRecoverAnswer}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">passwordRecoverQuestion</ui:define>
+                <h:inputText id="passwordRecoverQuestion" value="#{customerList.customer.passwordRecoverQuestion}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">postalCode</ui:define>
+                <h:inputText id="postalCode" value="#{customerList.customer.postalCode}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">state</ui:define>
+                <h:inputText id="state" value="#{customerList.customer.state}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">streetNumber</ui:define>
+                <h:inputText id="streetNumber" value="#{customerList.customer.streetNumber}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">title</ui:define>
+                <h:inputText id="title" value="#{customerList.customer.title}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">userName</ui:define>
+                <h:inputText id="userName" value="#{customerList.customer.userName}"/>
+            </s:decorate>
+
+        
+        </rich:simpleTogglePanel>
+        
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/CustomerList.xhtml"/>
+        </div>
+        
+    </h:form>
+    
+    <rich:panel>
+        <f:facet name="header">Customer search results</f:facet>
+    <div class="results" id="customerList">
+
+    <h:outputText value="The customer search returned no results." 
+               rendered="#{empty customerList.resultList}"/>
+               
+    <rich:dataTable id="customerList" 
+                var="customer"
+              value="#{customerList.resultList}" 
+           rendered="#{not empty customerList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="customerId #{customerList.order=='customerId asc' ? messages.down : ( customerList.order=='customerId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='customerId asc' ? 'customerId desc' : 'customerId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.customerId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="address1 #{customerList.order=='address1 asc' ? messages.down : ( customerList.order=='address1 desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='address1 asc' ? 'address1 desc' : 'address1 asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.address1}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="address2 #{customerList.order=='address2 asc' ? messages.down : ( customerList.order=='address2 desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='address2 asc' ? 'address2 desc' : 'address2 asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.address2}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="contactLand #{customerList.order=='contactLand asc' ? messages.down : ( customerList.order=='contactLand desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='contactLand asc' ? 'contactLand desc' : 'contactLand asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.contactLand}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="contactMobile #{customerList.order=='contactMobile asc' ? messages.down : ( customerList.order=='contactMobile desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='contactMobile asc' ? 'contactMobile desc' : 'contactMobile asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.contactMobile}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="country #{customerList.order=='country asc' ? messages.down : ( customerList.order=='country desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='country asc' ? 'country desc' : 'country asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.country}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="email #{customerList.order=='email asc' ? messages.down : ( customerList.order=='email desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='email asc' ? 'email desc' : 'email asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.email}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="firstName #{customerList.order=='firstName asc' ? messages.down : ( customerList.order=='firstName desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='firstName asc' ? 'firstName desc' : 'firstName asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.firstName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="lastName #{customerList.order=='lastName asc' ? messages.down : ( customerList.order=='lastName desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='lastName asc' ? 'lastName desc' : 'lastName asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.lastName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="nicPassportNo #{customerList.order=='nicPassportNo asc' ? messages.down : ( customerList.order=='nicPassportNo desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='nicPassportNo asc' ? 'nicPassportNo desc' : 'nicPassportNo asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.nicPassportNo}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="password #{customerList.order=='password asc' ? messages.down : ( customerList.order=='password desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='password asc' ? 'password desc' : 'password asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.password}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="passwordRecoverAnswer #{customerList.order=='passwordRecoverAnswer asc' ? messages.down : ( customerList.order=='passwordRecoverAnswer desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='passwordRecoverAnswer asc' ? 'passwordRecoverAnswer desc' : 'passwordRecoverAnswer asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.passwordRecoverAnswer}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="passwordRecoverQuestion #{customerList.order=='passwordRecoverQuestion asc' ? messages.down : ( customerList.order=='passwordRecoverQuestion desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='passwordRecoverQuestion asc' ? 'passwordRecoverQuestion desc' : 'passwordRecoverQuestion asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.passwordRecoverQuestion}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="postalCode #{customerList.order=='postalCode asc' ? messages.down : ( customerList.order=='postalCode desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='postalCode asc' ? 'postalCode desc' : 'postalCode asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.postalCode}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="privilage privilageId #{customerList.order=='privilage.privilageId asc' ? messages.down : ( customerList.order=='privilage.privilageId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='privilage.privilageId asc' ? 'privilage.privilageId desc' : 'privilage.privilageId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.privilage.privilageId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="state #{customerList.order=='state asc' ? messages.down : ( customerList.order=='state desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='state asc' ? 'state desc' : 'state asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.state}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="streetNumber #{customerList.order=='streetNumber asc' ? messages.down : ( customerList.order=='streetNumber desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='streetNumber asc' ? 'streetNumber desc' : 'streetNumber asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.streetNumber}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="title #{customerList.order=='title asc' ? messages.down : ( customerList.order=='title desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='title asc' ? 'title desc' : 'title asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.title}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="userName #{customerList.order=='userName asc' ? messages.down : ( customerList.order=='userName desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{customerList.order=='userName asc' ? 'userName desc' : 'userName asc'}"/>
+                </s:link>
+            </f:facet>
+            #{customer.userName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">action</f:facet>
+            <s:link view="/#{empty from ? 'Customer' : from}.xhtml" 
+                   value="Select" 
+                      id="customer">
+                <f:param name="customerCustomerId" 
+                        value="#{customer.customerId}"/>
+            </s:link>
+        </h:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+    
+    <div class="tableControl">
+      
+        <s:link view="/CustomerList.xhtml" 
+            rendered="#{customerList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/CustomerList.xhtml" 
+            rendered="#{customerList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult" 
+                    value="#{customerList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/CustomerList.xhtml" 
+            rendered="#{customerList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult" 
+                    value="#{customerList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/CustomerList.xhtml" 
+            rendered="#{customerList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult" 
+                    value="#{customerList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/CustomerEdit.xhtml"
+                    id="create" 
+                 value="Create customer">
+            <f:param name="customerCustomerId"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

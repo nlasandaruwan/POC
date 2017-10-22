@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/main-template.xhtml">
+
+<ui:define name="title">Flow 3 Start Page</ui:define>
+
+<ui:define name="content">
+<h2>This is Visit ##{flow3HitCountBean.incrementingCount}</h2>
+<fieldset>
+<legend>Flow 3: Configuring Flow with Flow-Specific XML File</legend>
+<h:form>
+
+<h:panelGrid columns="3" styleClass="formTable">
+  Email address: 
+  <h:inputText value="#{flowScope.email}" id="email"
+               required="true"
+               requiredMessage="Must supply email address"/>
+  <h:message for="email" styleClass="error"/>
+  
+  First (given) name: 
+  <h:inputText value="#{flow3Bean.firstName}" id="first"
+               required="true"
+               requiredMessage="Must supply first name"/>
+  <h:message for="first" styleClass="error"/>
+  
+  Last (family) name: 
+  <h:inputText value="#{flow3Bean.lastName}" id="last"
+               required="true"
+               requiredMessage="Must supply last name"/>
+  <h:message for="last" styleClass="error"/>
+  
+  <f:facet name="footer">
+    <h:commandButton value="Random Confirmation Page (via Java)"
+                     action="#{flow3Bean.doFlow}"/><br/>
+    <h:commandButton value="Confirmation Page Based on Visits (via switch)"
+                     action="confirm"/>
+  </f:facet>
+</h:panelGrid>
+
+</h:form>
+</fieldset>
+</ui:define>
+  
+</ui:composition>

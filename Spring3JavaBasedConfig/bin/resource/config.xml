@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="source.*"></context:component-scan>
+	<context:property-placeholder
+		location="source/ReportConfig.properties,source/AbstractConfig.properties"
+		ignore-unresolvable="true" />
+
+	<aop:aspectj-autoproxy />
+	
+	<!-- <bean id="magic" class="source.Magician" p:doMagic="Its a Magic Sandaruwan"> 
+		<property name="magiEmail" value="nlasandaruwan@gmail.com"></property> <property 
+		name="fromProp" value="${aa}"></property> </bean> -->
+
+	<bean id="magicBattern" class="source.MagicBatten" p:length="1" />
+	
+	<bean id="magician" class="source.Magician"/>
+
+	<bean id="audience" class="source.aop.logic.Audience" />
+	
+	<bean id="anno" class="source.aop.annotated.Anno" />
+
+
+	<aop:config>
+		<aop:aspect ref="audience">
+		<aop:pointcut expression="execution (* source.Magician.sayMagic(..))" id="pointcut"/>
+			<aop:before pointcut-ref="pointcut"	method="takeSeats" />
+			<aop:before pointcut-ref="pointcut"	method="turnOffCellPhones" />
+			<aop:after-returning pointcut-ref="pointcut" method="applaud" />
+			<aop:after-throwing pointcut-ref="pointcut" method="demandRefund" />
+			<aop:around pointcut-ref="pointcut" method="aroundHello"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>

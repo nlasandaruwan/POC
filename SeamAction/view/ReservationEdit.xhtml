@@ -1,0 +1,482 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    <h:form id="reservation" styleClass="edit">
+    
+        <rich:panel>
+            <f:facet name="header">#{reservationHome.managed ? 'Edit' : 'Add'} Reservation</f:facet>
+
+
+            <s:decorate id="reservationIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">reservationId</ui:define>
+                <h:inputText id="reservationId"
+                       required="true"
+                       disabled="#{reservationHome.managed}"
+                          value="#{reservationHome.instance.reservationId}">
+                    <a:support event="onblur" reRender="reservationIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+
+            <s:decorate id="adultsDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">adults</ui:define>
+                <h:inputText id="adults"
+                          value="#{reservationHome.instance.adults}">
+                    <a:support event="onblur" reRender="adultsDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="airportPickupDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">airportPickup</ui:define>
+                <h:inputTextarea id="airportPickup"
+                               cols="80"
+                               rows="3"
+                              value="#{reservationHome.instance.airportPickup}"/>
+            </s:decorate>
+
+
+            <s:decorate id="arrivalFromDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">arrivalFrom</ui:define>
+                <h:inputTextarea id="arrivalFrom"
+                               cols="80"
+                               rows="3"
+                              value="#{reservationHome.instance.arrivalFrom}"/>
+            </s:decorate>
+
+
+            <s:decorate id="arriveForDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">arriveFor</ui:define>
+                <h:inputTextarea id="arriveFor"
+                               cols="80"
+                               rows="3"
+                              value="#{reservationHome.instance.arriveFor}"/>
+            </s:decorate>
+
+
+            <s:decorate id="childrenDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">children</ui:define>
+                <h:inputText id="children"
+                          value="#{reservationHome.instance.children}">
+                    <a:support event="onblur" reRender="childrenDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+
+            <s:decorate id="fromDateDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">fromDate</ui:define>
+				<rich:calendar id="fromDate" 
+                          value="#{reservationHome.instance.fromDate}" datePattern="MM/dd/yyyy" />
+            </s:decorate>
+
+
+            <s:decorate id="leaveAfterDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">leaveAfter</ui:define>
+                <h:inputTextarea id="leaveAfter"
+                               cols="80"
+                               rows="3"
+                              value="#{reservationHome.instance.leaveAfter}"/>
+            </s:decorate>
+
+
+            <s:decorate id="nationalityDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">nationality</ui:define>
+                <h:inputTextarea id="nationality"
+                               cols="80"
+                               rows="3"
+                              value="#{reservationHome.instance.nationality}"/>
+            </s:decorate>
+
+
+            <s:decorate id="noofRoomsDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">noofRooms</ui:define>
+                <h:inputText id="noofRooms"
+                          value="#{reservationHome.instance.noofRooms}">
+                    <a:support event="onblur" reRender="noofRoomsDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+
+            <s:decorate id="reservationStatusDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">reservationStatus</ui:define>
+                <h:inputTextarea id="reservationStatus"
+                               cols="80"
+                               rows="3"
+                              value="#{reservationHome.instance.reservationStatus}"/>
+            </s:decorate>
+
+
+            <s:decorate id="roomCategoryDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">roomCategory</ui:define>
+                <h:inputTextarea id="roomCategory"
+                               cols="80"
+                               rows="3"
+                              value="#{reservationHome.instance.roomCategory}"/>
+            </s:decorate>
+
+
+            <s:decorate id="roomCategoryIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">roomCategoryId</ui:define>
+                <h:inputText id="roomCategoryId"
+                          value="#{reservationHome.instance.roomCategoryId}">
+                    <a:support event="onblur" reRender="roomCategoryIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="roomTypeDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">roomType</ui:define>
+                <h:inputTextarea id="roomType"
+                               cols="80"
+                               rows="3"
+                              value="#{reservationHome.instance.roomType}"/>
+            </s:decorate>
+
+
+            <s:decorate id="roomTypeIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">roomTypeId</ui:define>
+                <h:inputText id="roomTypeId"
+                          value="#{reservationHome.instance.roomTypeId}">
+                    <a:support event="onblur" reRender="roomTypeIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+
+            <s:decorate id="toDateDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">toDate</ui:define>
+				<rich:calendar id="toDate" 
+                          value="#{reservationHome.instance.toDate}" datePattern="MM/dd/yyyy" />
+            </s:decorate>
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+        </rich:panel>
+                
+        <div class="actionButtons">
+
+            <h:commandButton id="save" 
+                          value="Save" 
+                         action="#{reservationHome.persist}"
+                       disabled="#{!reservationHome.wired}"
+                       rendered="#{!reservationHome.managed}"/>  
+                          			  
+            <h:commandButton id="update" 
+                          value="Save" 
+                         action="#{reservationHome.update}"
+                       rendered="#{reservationHome.managed}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{reservationHome.remove}"
+                      immediate="true"
+                       rendered="#{reservationHome.managed}"/>
+                    
+            <s:button id="done" 
+                   value="Done"
+             propagation="end"
+                    view="/Reservation.xhtml"
+                rendered="#{reservationHome.managed}"/>
+                
+            <s:button id="cancel" 
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty reservationFrom ? 'ReservationList' : reservationFrom}.xhtml"
+                rendered="#{!reservationHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+    
+    <rich:tab label="accomodationMode">
+    <div class="association" id="accomodationModeParent">
+    
+        <h:outputText value="There is no accomodationMode associated with this reservation." 
+                   rendered="#{reservationHome.instance.accomodationMode == null}"/>
+        
+        <rich:dataTable var="accomodationMode" 
+                   value="#{reservationHome.instance.accomodationMode}" 
+                rendered="#{reservationHome.instance.accomodationMode != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="accomodationModeTable">
+            <h:column>
+                <f:facet name="header">accomodationModeId</f:facet>
+                #{accomodationMode.accomodationModeId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">accomodation</f:facet>
+                #{accomodationMode.accomodation}
+            </h:column>
+            <h:column>
+                <f:facet name="header">action</f:facet>
+                <s:link view="/AccomodationMode.xhtml" 
+                         id="viewaccomodationMode" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="accomodationModeAccomodationModeId" 
+                           value="#{accomodationMode.accomodationModeId}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button value="Select accomodationMode"
+                       view="/AccomodationModeList.xhtml">
+                <f:param name="from" value="ReservationEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </rich:tab>
+    
+    <rich:tab label="customer">
+    <div class="association" id="customerParent">
+    
+        <h:outputText value="There is no customer associated with this reservation." 
+                   rendered="#{reservationHome.instance.customer == null}"/>
+        
+        <rich:dataTable var="customer" 
+                   value="#{reservationHome.instance.customer}" 
+                rendered="#{reservationHome.instance.customer != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="customerTable">
+            <h:column>
+                <f:facet name="header">customerId</f:facet>
+                #{customer.customerId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">address1</f:facet>
+                #{customer.address1}
+            </h:column>
+            <h:column>
+                <f:facet name="header">address2</f:facet>
+                #{customer.address2}
+            </h:column>
+            <h:column>
+                <f:facet name="header">contactLand</f:facet>
+                #{customer.contactLand}
+            </h:column>
+            <h:column>
+                <f:facet name="header">contactMobile</f:facet>
+                #{customer.contactMobile}
+            </h:column>
+            <h:column>
+                <f:facet name="header">country</f:facet>
+                #{customer.country}
+            </h:column>
+            <h:column>
+                <f:facet name="header">email</f:facet>
+                #{customer.email}
+            </h:column>
+            <h:column>
+                <f:facet name="header">firstName</f:facet>
+                #{customer.firstName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">lastName</f:facet>
+                #{customer.lastName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">nicPassportNo</f:facet>
+                #{customer.nicPassportNo}
+            </h:column>
+            <h:column>
+                <f:facet name="header">password</f:facet>
+                #{customer.password}
+            </h:column>
+            <h:column>
+                <f:facet name="header">passwordRecoverAnswer</f:facet>
+                #{customer.passwordRecoverAnswer}
+            </h:column>
+            <h:column>
+                <f:facet name="header">passwordRecoverQuestion</f:facet>
+                #{customer.passwordRecoverQuestion}
+            </h:column>
+            <h:column>
+                <f:facet name="header">postalCode</f:facet>
+                #{customer.postalCode}
+            </h:column>
+            <h:column>
+	    	    <f:facet name="header">privilage privilageId</f:facet>
+		    	#{customer.privilage.privilageId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">state</f:facet>
+                #{customer.state}
+            </h:column>
+            <h:column>
+                <f:facet name="header">streetNumber</f:facet>
+                #{customer.streetNumber}
+            </h:column>
+            <h:column>
+                <f:facet name="header">title</f:facet>
+                #{customer.title}
+            </h:column>
+            <h:column>
+                <f:facet name="header">userName</f:facet>
+                #{customer.userName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">action</f:facet>
+                <s:link view="/Customer.xhtml" 
+                         id="viewcustomer" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="customerCustomerId" 
+                           value="#{customer.customerId}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button value="Select customer"
+                       view="/CustomerList.xhtml">
+                <f:param name="from" value="ReservationEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </rich:tab>
+    
+    <rich:tab label="payment">
+    <div class="association" id="paymentParent">
+    
+        <h:outputText value="There is no payment associated with this reservation." 
+                   rendered="#{reservationHome.instance.payment == null}"/>
+        
+        <rich:dataTable var="payment" 
+                   value="#{reservationHome.instance.payment}" 
+                rendered="#{reservationHome.instance.payment != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="paymentTable">
+            <h:column>
+                <f:facet name="header">paymentId</f:facet>
+                #{payment.paymentId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">cardExpireMonth</f:facet>
+                #{payment.cardExpireMonth}
+            </h:column>
+            <h:column>
+                <f:facet name="header">cardExpireYear</f:facet>
+                #{payment.cardExpireYear}
+            </h:column>
+            <h:column>
+                <f:facet name="header">cardHolderName</f:facet>
+                #{payment.cardHolderName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">cardNumber</f:facet>
+                #{payment.cardNumber}
+            </h:column>
+            <h:column>
+                <f:facet name="header">cardType</f:facet>
+                #{payment.cardType}
+            </h:column>
+            <h:column>
+                <f:facet name="header">email</f:facet>
+                #{payment.email}
+            </h:column>
+            <h:column>
+                <f:facet name="header">paymentAmount</f:facet>
+                #{payment.paymentAmount}
+            </h:column>
+            <h:column>
+                <f:facet name="header">paymentDate</f:facet>
+                #{payment.paymentDate}
+            </h:column>
+            <h:column>
+                <f:facet name="header">action</f:facet>
+                <s:link view="/Payment.xhtml" 
+                         id="viewpayment" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="paymentPaymentId" 
+                           value="#{payment.paymentId}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button value="Select payment"
+                       view="/PaymentList.xhtml">
+                <f:param name="from" value="ReservationEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </rich:tab>
+
+    <rich:tab label="roomreservations">
+        <div class="association" id="roomreservationsChildren">
+        
+            <h:outputText value="There are no roomreservations associated with this reservation." 
+                       rendered="#{empty reservationHome.roomreservations}"/>
+        
+            <rich:dataTable value="#{reservationHome.roomreservations}" 
+                           var="roomreservation" 
+                      rendered="#{not empty reservationHome.roomreservations}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="roomreservationsTable">
+                <h:column>
+                    <f:facet name="header">reservationId</f:facet>
+                    #{roomreservation.id.reservationId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomId</f:facet>
+                    #{roomreservation.id.roomId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">action</f:facet>
+                    <s:link view="/Roomreservation.xhtml" 
+                              id="selectroomreservation" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="roomreservationReservationId" 
+                                value="#{roomreservation.id.reservationId}"/>
+                        <f:param name="roomreservationRoomId" 
+                                value="#{roomreservation.id.roomId}"/>
+                        <f:param name="roomreservationFrom" value="Reservation"/>
+                    </s:link>
+                </h:column>
+            </rich:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{reservationHome.managed}" id="roomreservations">
+        <div class="actionButtons">
+            <s:button id="addroomreservation" 
+                   value="Add roomreservation"
+                    view="/RoomreservationEdit.xhtml"
+             propagation="none">
+                 <f:param name="reservationReservationId" 
+                         value="#{reservationHome.instance.reservationId}"/>
+                 <f:param name="roomreservationFrom" value="Reservation"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

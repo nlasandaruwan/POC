@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.jst.jsf.ui.jsfFacetInstall">
+		<item value="SERVER_SUPPLIED" key="deployImplType"/>
+		<section name="urlMappings">
+			<list key="pattern">
+				<item value="*.seam"/>
+			</list>
+		</section>
+	</section>
+</section>

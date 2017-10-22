@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+	<title>JSF 2.2: Blank Starting-Point Project</title>
+	<link href="./css/styles.css" rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
+	<h1 class="title">Test JSF 2</h1>
+	<div align="center">
+		<fieldset>
+			<legend>JSF Test Form</legend>
+			<h:form>
+				<h3>#{applicationScopeMessage.message}</h3>
+				<h3>#{sessionScopeMessage.message}</h3>
+				<p>
+					Bank example <a href="bank-lookup.jsf">try again</a>.
+				</p>
+				<p>
+					Bank example with session <a href="bank-lookup-with-session.jsf">try again</a>.
+				</p>
+				<p>
+					Bank example with DI <a href="bank-lookup-with-di.jsf">try again</a>.
+				</p>
+
+				<p>
+					Choose Language <a href="choose-language.jsf">try again</a>.
+				</p>
+				
+				<p>
+					Choose Select ONE Color  <a href="select-one-choices.jsf">try again</a>.
+				</p>
+				
+				<p>
+					Choose Select MANY Color  <a href="select-many-choices.jsf">try again</a>.
+				</p>
+				
+				<p>
+					Choose Select ONE Color  <a href="select-one-choices-with-default.jsf"> with default try again</a>.
+				</p>
+				
+				<p>
+					Choose Study plan  <a href="study-plan-input.jsf"> with default try again</a>.
+				</p>
+				
+				<p>
+					Choose Random page from face config file  <a href="choose-language-fConfig.jsf"> here </a>.
+				</p>
+				
+  					Some random data: <h:inputText value="#{randomPageLoaderBean.message}" />
+				<br />
+				<h:commandButton value="get Random page"
+					action="#{randomPageLoaderBean.choosePage()}" />
+			</h:form>
+		</fieldset>
+	</div>
+</h:body>
+</html>

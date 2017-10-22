@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="/templates/normal-page-template.xhtml">
+
+<ui:define name="title">Home Page (Outside All Flows)</ui:define>
+
+<ui:define name="content">
+<h:form>
+<ul>
+  <li><h:commandLink value="First Flow" action="first-flow"/></li>
+  <li><h:commandLink value="Second Flow" action="second-flow"/></li>
+  <li><h:commandLink value="Java-Defined Flow" action="flow-using-java"/></li>
+</ul>
+</h:form>
+</ui:define>
+  
+</ui:composition>

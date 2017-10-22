@@ -1,0 +1,382 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    <h:form id="customer" styleClass="edit">
+    
+        <rich:panel>
+            <f:facet name="header">#{customerHome.managed ? 'Edit' : 'Add'} Customer</f:facet>
+
+
+            <s:decorate id="customerIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">customerId</ui:define>
+                <h:inputText id="customerId"
+                       required="true"
+                       disabled="#{customerHome.managed}"
+                          value="#{customerHome.instance.customerId}">
+                    <a:support event="onblur" reRender="customerIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="address1Decoration" template="layout/edit.xhtml">
+                <ui:define name="label">address1</ui:define>
+                <h:inputTextarea id="address1"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.address1}"/>
+            </s:decorate>
+
+
+            <s:decorate id="address2Decoration" template="layout/edit.xhtml">
+                <ui:define name="label">address2</ui:define>
+                <h:inputTextarea id="address2"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.address2}"/>
+            </s:decorate>
+
+
+            <s:decorate id="contactLandDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">contactLand</ui:define>
+                <h:inputTextarea id="contactLand"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.contactLand}"/>
+            </s:decorate>
+
+
+            <s:decorate id="contactMobileDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">contactMobile</ui:define>
+                <h:inputTextarea id="contactMobile"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.contactMobile}"/>
+            </s:decorate>
+
+
+            <s:decorate id="countryDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">country</ui:define>
+                <h:inputTextarea id="country"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.country}"/>
+            </s:decorate>
+
+
+            <s:decorate id="emailDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">email</ui:define>
+                <h:inputTextarea id="email"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.email}"/>
+            </s:decorate>
+
+
+            <s:decorate id="firstNameDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">firstName</ui:define>
+                <h:inputTextarea id="firstName"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.firstName}"/>
+            </s:decorate>
+
+
+            <s:decorate id="lastNameDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">lastName</ui:define>
+                <h:inputTextarea id="lastName"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.lastName}"/>
+            </s:decorate>
+
+
+            <s:decorate id="nicPassportNoDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">nicPassportNo</ui:define>
+                <h:inputTextarea id="nicPassportNo"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.nicPassportNo}"/>
+            </s:decorate>
+
+
+            <s:decorate id="passwordDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">password</ui:define>
+                <h:inputTextarea id="password"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.password}"/>
+            </s:decorate>
+
+
+            <s:decorate id="passwordRecoverAnswerDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">passwordRecoverAnswer</ui:define>
+                <h:inputTextarea id="passwordRecoverAnswer"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.passwordRecoverAnswer}"/>
+            </s:decorate>
+
+
+            <s:decorate id="passwordRecoverQuestionDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">passwordRecoverQuestion</ui:define>
+                <h:inputTextarea id="passwordRecoverQuestion"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.passwordRecoverQuestion}"/>
+            </s:decorate>
+
+
+            <s:decorate id="postalCodeDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">postalCode</ui:define>
+                <h:inputTextarea id="postalCode"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.postalCode}"/>
+            </s:decorate>
+
+
+
+
+            <s:decorate id="stateDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">state</ui:define>
+                <h:inputTextarea id="state"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.state}"/>
+            </s:decorate>
+
+
+            <s:decorate id="streetNumberDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">streetNumber</ui:define>
+                <h:inputTextarea id="streetNumber"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.streetNumber}"/>
+            </s:decorate>
+
+
+            <s:decorate id="titleDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">title</ui:define>
+                <h:inputTextarea id="title"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.title}"/>
+            </s:decorate>
+
+
+            <s:decorate id="userNameDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">userName</ui:define>
+                <h:inputTextarea id="userName"
+                               cols="80"
+                               rows="3"
+                              value="#{customerHome.instance.userName}"/>
+            </s:decorate>
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+        </rich:panel>
+                
+        <div class="actionButtons">
+
+            <h:commandButton id="save" 
+                          value="Save" 
+                         action="#{customerHome.persist}"
+                       disabled="#{!customerHome.wired}"
+                       rendered="#{!customerHome.managed}"/>  
+                          			  
+            <h:commandButton id="update" 
+                          value="Save" 
+                         action="#{customerHome.update}"
+                       rendered="#{customerHome.managed}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{customerHome.remove}"
+                      immediate="true"
+                       rendered="#{customerHome.managed}"/>
+                    
+            <s:button id="done" 
+                   value="Done"
+             propagation="end"
+                    view="/Customer.xhtml"
+                rendered="#{customerHome.managed}"/>
+                
+            <s:button id="cancel" 
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty customerFrom ? 'CustomerList' : customerFrom}.xhtml"
+                rendered="#{!customerHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+    
+    <rich:tab label="privilage">
+    <div class="association" id="privilageParent">
+    
+        <h:outputText value="There is no privilage associated with this customer." 
+                   rendered="#{customerHome.instance.privilage == null}"/>
+        
+        <rich:dataTable var="privilage" 
+                   value="#{customerHome.instance.privilage}" 
+                rendered="#{customerHome.instance.privilage != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="privilageTable">
+            <h:column>
+                <f:facet name="header">privilageId</f:facet>
+                #{privilage.privilageId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">description</f:facet>
+                #{privilage.description}
+            </h:column>
+            <h:column>
+                <f:facet name="header">privilageName</f:facet>
+                #{privilage.privilageName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">action</f:facet>
+                <s:link view="/Privilage.xhtml" 
+                         id="viewprivilage" 
+                      value="View" 
+                propagation="none">
+                    <f:param name="privilagePrivilageId" 
+                           value="#{privilage.privilageId}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button value="Select privilage"
+                       view="/PrivilageList.xhtml">
+                <f:param name="from" value="CustomerEdit"/>
+            </s:button>
+        </div>
+        
+    </div>
+    </rich:tab>
+
+    <rich:tab label="reservations">
+        <div class="association" id="reservationsChildren">
+        
+            <h:outputText value="There are no reservations associated with this customer." 
+                       rendered="#{empty customerHome.reservations}"/>
+        
+            <rich:dataTable value="#{customerHome.reservations}" 
+                           var="reservation" 
+                      rendered="#{not empty customerHome.reservations}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="reservationsTable">
+                <h:column>
+                    <f:facet name="header">reservationId</f:facet>
+                    <h:outputText value="#{reservation.reservationId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">adults</f:facet>
+                    <h:outputText value="#{reservation.adults}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">airportPickup</f:facet>
+                    <h:outputText value="#{reservation.airportPickup}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">arrivalFrom</f:facet>
+                    <h:outputText value="#{reservation.arrivalFrom}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">arriveFor</f:facet>
+                    <h:outputText value="#{reservation.arriveFor}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">children</f:facet>
+                    <h:outputText value="#{reservation.children}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">fromDate</f:facet>
+                    <h:outputText value="#{reservation.fromDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">leaveAfter</f:facet>
+                    <h:outputText value="#{reservation.leaveAfter}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">nationality</f:facet>
+                    <h:outputText value="#{reservation.nationality}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">noofRooms</f:facet>
+                    <h:outputText value="#{reservation.noofRooms}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">reservationStatus</f:facet>
+                    <h:outputText value="#{reservation.reservationStatus}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomCategory</f:facet>
+                    <h:outputText value="#{reservation.roomCategory}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomCategoryId</f:facet>
+                    <h:outputText value="#{reservation.roomCategoryId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomType</f:facet>
+                    <h:outputText value="#{reservation.roomType}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomTypeId</f:facet>
+                    <h:outputText value="#{reservation.roomTypeId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">toDate</f:facet>
+                    <h:outputText value="#{reservation.toDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">action</f:facet>
+                    <s:link view="/Reservation.xhtml" 
+                              id="selectreservation" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="reservationReservationId" 
+                                value="#{reservation.reservationId}"/>
+                        <f:param name="reservationFrom" value="Customer"/>
+                    </s:link>
+                </h:column>
+            </rich:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{customerHome.managed}" id="reservations">
+        <div class="actionButtons">
+            <s:button id="addreservation" 
+                   value="Add reservation"
+                    view="/ReservationEdit.xhtml"
+             propagation="none">
+                 <f:param name="customerCustomerId" 
+                         value="#{customerHome.instance.customerId}"/>
+                 <f:param name="reservationFrom" value="Customer"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

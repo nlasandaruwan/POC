@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd">
+      
+   <param name="firstResult" value="#{hotelProfileList.firstResult}"/>
+   <param name="order" value="#{hotelProfileList.order}"/>
+   <param name="from"/>
+   <param name="address1" value="#{hotelProfileList.hotelProfile.address1}"/>
+   <param name="address2" value="#{hotelProfileList.hotelProfile.address2}"/>
+   <param name="city" value="#{hotelProfileList.hotelProfile.city}"/>
+   <param name="contactNumber1" value="#{hotelProfileList.hotelProfile.contactNumber1}"/>
+   <param name="contactNumber2" value="#{hotelProfileList.hotelProfile.contactNumber2}"/>
+   <param name="country" value="#{hotelProfileList.hotelProfile.country}"/>
+   <param name="direction" value="#{hotelProfileList.hotelProfile.direction}"/>
+   <param name="email" value="#{hotelProfileList.hotelProfile.email}"/>
+   <param name="fax" value="#{hotelProfileList.hotelProfile.fax}"/>
+   <param name="hotelDescription" value="#{hotelProfileList.hotelProfile.hotelDescription}"/>
+   <param name="hotelName" value="#{hotelProfileList.hotelProfile.hotelName}"/>
+   <param name="otherWebs" value="#{hotelProfileList.hotelProfile.otherWebs}"/>
+   <param name="postalCode" value="#{hotelProfileList.hotelProfile.postalCode}"/>
+
+</page>

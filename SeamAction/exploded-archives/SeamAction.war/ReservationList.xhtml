@@ -1,0 +1,312 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+    
+    <h:form id="reservationSearch" styleClass="edit">
+    
+        <rich:simpleTogglePanel label="Reservation search parameters" switchType="ajax">
+        
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">airportPickup</ui:define>
+                <h:inputText id="airportPickup" value="#{reservationList.reservation.airportPickup}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">arrivalFrom</ui:define>
+                <h:inputText id="arrivalFrom" value="#{reservationList.reservation.arrivalFrom}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">arriveFor</ui:define>
+                <h:inputText id="arriveFor" value="#{reservationList.reservation.arriveFor}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">leaveAfter</ui:define>
+                <h:inputText id="leaveAfter" value="#{reservationList.reservation.leaveAfter}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">nationality</ui:define>
+                <h:inputText id="nationality" value="#{reservationList.reservation.nationality}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">reservationStatus</ui:define>
+                <h:inputText id="reservationStatus" value="#{reservationList.reservation.reservationStatus}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">roomCategory</ui:define>
+                <h:inputText id="roomCategory" value="#{reservationList.reservation.roomCategory}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">roomType</ui:define>
+                <h:inputText id="roomType" value="#{reservationList.reservation.roomType}"/>
+            </s:decorate>
+
+        
+        </rich:simpleTogglePanel>
+        
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/ReservationList.xhtml"/>
+        </div>
+        
+    </h:form>
+    
+    <rich:panel>
+        <f:facet name="header">Reservation search results</f:facet>
+    <div class="results" id="reservationList">
+
+    <h:outputText value="The reservation search returned no results." 
+               rendered="#{empty reservationList.resultList}"/>
+               
+    <rich:dataTable id="reservationList" 
+                var="reservation"
+              value="#{reservationList.resultList}" 
+           rendered="#{not empty reservationList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="reservationId #{reservationList.order=='reservationId asc' ? messages.down : ( reservationList.order=='reservationId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='reservationId asc' ? 'reservationId desc' : 'reservationId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.reservationId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="accomodationMode accomodationModeId #{reservationList.order=='accomodationMode.accomodationModeId asc' ? messages.down : ( reservationList.order=='accomodationMode.accomodationModeId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='accomodationMode.accomodationModeId asc' ? 'accomodationMode.accomodationModeId desc' : 'accomodationMode.accomodationModeId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.accomodationMode.accomodationModeId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="adults #{reservationList.order=='adults asc' ? messages.down : ( reservationList.order=='adults desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='adults asc' ? 'adults desc' : 'adults asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.adults}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="airportPickup #{reservationList.order=='airportPickup asc' ? messages.down : ( reservationList.order=='airportPickup desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='airportPickup asc' ? 'airportPickup desc' : 'airportPickup asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.airportPickup}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="arrivalFrom #{reservationList.order=='arrivalFrom asc' ? messages.down : ( reservationList.order=='arrivalFrom desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='arrivalFrom asc' ? 'arrivalFrom desc' : 'arrivalFrom asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.arrivalFrom}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="arriveFor #{reservationList.order=='arriveFor asc' ? messages.down : ( reservationList.order=='arriveFor desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='arriveFor asc' ? 'arriveFor desc' : 'arriveFor asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.arriveFor}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="children #{reservationList.order=='children asc' ? messages.down : ( reservationList.order=='children desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='children asc' ? 'children desc' : 'children asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.children}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="customer customerId #{reservationList.order=='customer.customerId asc' ? messages.down : ( reservationList.order=='customer.customerId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='customer.customerId asc' ? 'customer.customerId desc' : 'customer.customerId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.customer.customerId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="fromDate #{reservationList.order=='fromDate asc' ? messages.down : ( reservationList.order=='fromDate desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='fromDate asc' ? 'fromDate desc' : 'fromDate asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.fromDate}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="leaveAfter #{reservationList.order=='leaveAfter asc' ? messages.down : ( reservationList.order=='leaveAfter desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='leaveAfter asc' ? 'leaveAfter desc' : 'leaveAfter asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.leaveAfter}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="nationality #{reservationList.order=='nationality asc' ? messages.down : ( reservationList.order=='nationality desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='nationality asc' ? 'nationality desc' : 'nationality asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.nationality}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="noofRooms #{reservationList.order=='noofRooms asc' ? messages.down : ( reservationList.order=='noofRooms desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='noofRooms asc' ? 'noofRooms desc' : 'noofRooms asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.noofRooms}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="payment paymentId #{reservationList.order=='payment.paymentId asc' ? messages.down : ( reservationList.order=='payment.paymentId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='payment.paymentId asc' ? 'payment.paymentId desc' : 'payment.paymentId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.payment.paymentId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="reservationStatus #{reservationList.order=='reservationStatus asc' ? messages.down : ( reservationList.order=='reservationStatus desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='reservationStatus asc' ? 'reservationStatus desc' : 'reservationStatus asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.reservationStatus}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="roomCategory #{reservationList.order=='roomCategory asc' ? messages.down : ( reservationList.order=='roomCategory desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='roomCategory asc' ? 'roomCategory desc' : 'roomCategory asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.roomCategory}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="roomCategoryId #{reservationList.order=='roomCategoryId asc' ? messages.down : ( reservationList.order=='roomCategoryId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='roomCategoryId asc' ? 'roomCategoryId desc' : 'roomCategoryId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.roomCategoryId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="roomType #{reservationList.order=='roomType asc' ? messages.down : ( reservationList.order=='roomType desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='roomType asc' ? 'roomType desc' : 'roomType asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.roomType}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="roomTypeId #{reservationList.order=='roomTypeId asc' ? messages.down : ( reservationList.order=='roomTypeId desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='roomTypeId asc' ? 'roomTypeId desc' : 'roomTypeId asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.roomTypeId}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <s:link styleClass="columnHeader"
+                             value="toDate #{reservationList.order=='toDate asc' ? messages.down : ( reservationList.order=='toDate desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{reservationList.order=='toDate asc' ? 'toDate desc' : 'toDate asc'}"/>
+                </s:link>
+            </f:facet>
+            #{reservation.toDate}
+        </h:column>
+        <h:column>
+            <f:facet name="header">action</f:facet>
+            <s:link view="/#{empty from ? 'Reservation' : from}.xhtml" 
+                   value="Select" 
+                      id="reservation">
+                <f:param name="reservationReservationId" 
+                        value="#{reservation.reservationId}"/>
+            </s:link>
+        </h:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+    
+    <div class="tableControl">
+      
+        <s:link view="/ReservationList.xhtml" 
+            rendered="#{reservationList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+        
+        <s:link view="/ReservationList.xhtml" 
+            rendered="#{reservationList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult" 
+                    value="#{reservationList.previousFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/ReservationList.xhtml" 
+            rendered="#{reservationList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult" 
+                    value="#{reservationList.nextFirstResult}"/>
+        </s:link>
+        
+        <s:link view="/ReservationList.xhtml" 
+            rendered="#{reservationList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult" 
+                    value="#{reservationList.lastFirstResult}"/>
+        </s:link>
+        
+    </div>
+    
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/ReservationEdit.xhtml"
+                    id="create" 
+                 value="Create reservation">
+            <f:param name="reservationReservationId"/>
+        </s:button>
+    </s:div>
+    
+</ui:define>
+
+</ui:composition>
+

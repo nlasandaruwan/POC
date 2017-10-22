@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- This is the bean that needs to be protected. -->
+	
+	<bean id='bookBean' class='bean.BookBeanImpl' />
+	<bean id='accountBean' class='bean.account.AccountImpl' />
+	
+
+	<!-- This bean defines a proxy for the protected bean. Notice that -->
+	<!-- the id defined above is specified. When an application asks Spring	-->
+	<!-- for a bookBean it will get this proxy instead. -->
+	
+	<bean id='autoProxyCreator'
+		class='org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator'>
+		<property name='interceptorNames'>
+			<list>
+				<value>securityInterceptor</value>
+			</list>
+		</property>
+		<property name='beanNames'>
+			<list>
+				<value>bookBean</value>
+				<value>accountBean</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- This bean specifies which roles are authorized to execute which	methods. -->
+	
+	<bean id='securityInterceptor'
+		class='org.acegisecurity.intercept.method.aopalliance.MethodSecurityInterceptor'>
+		<property name='authenticationManager' ref='authenticationManager' />
+		<property name='accessDecisionManager' ref='accessDecisionManager' />
+		<property name='objectDefinitionSource'>
+			<value>
+				bean.BookBean.setValue=ROLE_MANAGER
+				bean.BookBean.changeValue=ROLE_MANAGER
+				
+				bean.account.Account.withdrow=ROLE_WORKER
+				bean.account.Account.depposit=ROLE_WORKER
+				
+			</value>
+		</property>
+	</bean>
+
+	<bean id='authenticationManager' class='org.acegisecurity.providers.ProviderManager'>
+		<property name='providers'>
+			<list>
+				<ref bean='inMemoryAuthenticationProvider' />
+				<ref bean='jdbcAuthenticationProvider' />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- <bean id="accessDecisionManagers" class="org.acegisecurity.vote.UnanimousBased"/> -->
+
+	<bean id="accessDecisionManager" class='org.acegisecurity.vote.AffirmativeBased'>
+		<property name='decisionVoters'>
+			<list>
+				<ref bean='roleVoter' />
+			</list>
+		</property>
+		
+		<property name="allowIfAllAbstainDecisions" value="true"></property>
+		
+	</bean>
+
+	<bean id='roleVoter' class='org.acegisecurity.vote.RoleVoter'>
+		<property name="rolePrefix" value="ROLE_" />
+	</bean>
+
+	<bean id='inMemoryAuthenticationProvider'
+		class='org.acegisecurity.providers.dao.DaoAuthenticationProvider'>
+		<property name='userDetailsService' ref='inMemoryuserDetailsService' />
+	</bean>
+	
+	<bean id='jdbcAuthenticationProvider'
+		class='org.acegisecurity.providers.dao.DaoAuthenticationProvider'>
+		<property name='userDetailsService' ref='jdbcUserDetailsService' />
+		<property name="passwordEncoder">
+			<bean class="org.acegisecurity.providers.encoding.Md5PasswordEncoder" />
+		</property>
+	</bean>
+
+	<!-- This bean specifies which roles are assigned to each user. You'll notice -->
+	<!-- that I'm using an in-memory database implementation instead of using -->
+	<!-- LDAP or a 'real' database. The ACEGI-provided in-memory implementation is great for testing! -->
+	
+	<bean id='inMemoryuserDetailsService' class='org.acegisecurity.userdetails.memory.InMemoryDaoImpl'>
+		<property name='userMap'>
+			<value>
+				manager=manager,ROLE_MANAGER
+				worker=worker,ROLE_WORKER				
+				anonymous=anonymous,
+				disabled=disabled,disabled,ROLE_WORKER
+				Sandaruwan.perera=axis2,ROLE_ARCHITECH
+			</value>
+		</property>
+	</bean>
+
+	<bean id="jdbcUserDetailsService" class="org.acegisecurity.userdetails.jdbc.JdbcDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/spring_security" />
+		<property name="username" value="root" />
+		<property name="password" value="123" />
+	</bean>
+
+</beans>

@@ -1,0 +1,253 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    <h:form id="payment" styleClass="edit">
+    
+        <rich:panel>
+            <f:facet name="header">#{paymentHome.managed ? 'Edit' : 'Add'} Payment</f:facet>
+
+
+            <s:decorate id="paymentIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">paymentId</ui:define>
+                <h:inputText id="paymentId"
+                       required="true"
+                       disabled="#{paymentHome.managed}"
+                          value="#{paymentHome.instance.paymentId}">
+                    <a:support event="onblur" reRender="paymentIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="cardExpireMonthDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">cardExpireMonth</ui:define>
+                <h:inputTextarea id="cardExpireMonth"
+                               cols="80"
+                               rows="3"
+                              value="#{paymentHome.instance.cardExpireMonth}"/>
+            </s:decorate>
+
+
+            <s:decorate id="cardExpireYearDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">cardExpireYear</ui:define>
+                <h:inputTextarea id="cardExpireYear"
+                               cols="80"
+                               rows="3"
+                              value="#{paymentHome.instance.cardExpireYear}"/>
+            </s:decorate>
+
+
+            <s:decorate id="cardHolderNameDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">cardHolderName</ui:define>
+                <h:inputTextarea id="cardHolderName"
+                               cols="80"
+                               rows="3"
+                              value="#{paymentHome.instance.cardHolderName}"/>
+            </s:decorate>
+
+
+            <s:decorate id="cardNumberDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">cardNumber</ui:define>
+                <h:inputTextarea id="cardNumber"
+                               cols="80"
+                               rows="3"
+                              value="#{paymentHome.instance.cardNumber}"/>
+            </s:decorate>
+
+
+            <s:decorate id="cardTypeDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">cardType</ui:define>
+                <h:inputTextarea id="cardType"
+                               cols="80"
+                               rows="3"
+                              value="#{paymentHome.instance.cardType}"/>
+            </s:decorate>
+
+
+            <s:decorate id="emailDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">email</ui:define>
+                <h:inputTextarea id="email"
+                               cols="80"
+                               rows="3"
+                              value="#{paymentHome.instance.email}"/>
+            </s:decorate>
+
+
+            <s:decorate id="paymentAmountDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">paymentAmount</ui:define>
+                <h:inputText id="paymentAmount"
+                          value="#{paymentHome.instance.paymentAmount}">
+                    <a:support event="onblur" reRender="paymentAmountDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="paymentDateDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">paymentDate</ui:define>
+				<rich:calendar id="paymentDate" 
+                          value="#{paymentHome.instance.paymentDate}" datePattern="MM/dd/yyyy" />
+            </s:decorate>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+        </rich:panel>
+                
+        <div class="actionButtons">
+
+            <h:commandButton id="save" 
+                          value="Save" 
+                         action="#{paymentHome.persist}"
+                       disabled="#{!paymentHome.wired}"
+                       rendered="#{!paymentHome.managed}"/>  
+                          			  
+            <h:commandButton id="update" 
+                          value="Save" 
+                         action="#{paymentHome.update}"
+                       rendered="#{paymentHome.managed}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{paymentHome.remove}"
+                      immediate="true"
+                       rendered="#{paymentHome.managed}"/>
+                    
+            <s:button id="done" 
+                   value="Done"
+             propagation="end"
+                    view="/Payment.xhtml"
+                rendered="#{paymentHome.managed}"/>
+                
+            <s:button id="cancel" 
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty paymentFrom ? 'PaymentList' : paymentFrom}.xhtml"
+                rendered="#{!paymentHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="reservations">
+        <div class="association" id="reservationsChildren">
+        
+            <h:outputText value="There are no reservations associated with this payment." 
+                       rendered="#{empty paymentHome.reservations}"/>
+        
+            <rich:dataTable value="#{paymentHome.reservations}" 
+                           var="reservation" 
+                      rendered="#{not empty paymentHome.reservations}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="reservationsTable">
+                <h:column>
+                    <f:facet name="header">reservationId</f:facet>
+                    <h:outputText value="#{reservation.reservationId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">adults</f:facet>
+                    <h:outputText value="#{reservation.adults}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">airportPickup</f:facet>
+                    <h:outputText value="#{reservation.airportPickup}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">arrivalFrom</f:facet>
+                    <h:outputText value="#{reservation.arrivalFrom}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">arriveFor</f:facet>
+                    <h:outputText value="#{reservation.arriveFor}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">children</f:facet>
+                    <h:outputText value="#{reservation.children}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">fromDate</f:facet>
+                    <h:outputText value="#{reservation.fromDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">leaveAfter</f:facet>
+                    <h:outputText value="#{reservation.leaveAfter}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">nationality</f:facet>
+                    <h:outputText value="#{reservation.nationality}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">noofRooms</f:facet>
+                    <h:outputText value="#{reservation.noofRooms}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">reservationStatus</f:facet>
+                    <h:outputText value="#{reservation.reservationStatus}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomCategory</f:facet>
+                    <h:outputText value="#{reservation.roomCategory}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomCategoryId</f:facet>
+                    <h:outputText value="#{reservation.roomCategoryId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomType</f:facet>
+                    <h:outputText value="#{reservation.roomType}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomTypeId</f:facet>
+                    <h:outputText value="#{reservation.roomTypeId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">toDate</f:facet>
+                    <h:outputText value="#{reservation.toDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">action</f:facet>
+                    <s:link view="/Reservation.xhtml" 
+                              id="selectreservation" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="reservationReservationId" 
+                                value="#{reservation.reservationId}"/>
+                        <f:param name="reservationFrom" value="Payment"/>
+                    </s:link>
+                </h:column>
+            </rich:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{paymentHome.managed}" id="reservations">
+        <div class="actionButtons">
+            <s:button id="addreservation" 
+                   value="Add reservation"
+                    view="/ReservationEdit.xhtml"
+             propagation="none">
+                 <f:param name="paymentPaymentId" 
+                         value="#{paymentHome.instance.paymentId}"/>
+                 <f:param name="reservationFrom" value="Payment"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd">
+      
+   <param name="roomreservationFrom"/>
+   <param name="roomreservationReservationId" value="#{roomreservationHome.roomreservationId.reservationId}"/>
+   <param name="roomreservationRoomId" value="#{roomreservationHome.roomreservationId.roomId}"/>
+   <param name="reservationFrom"/>
+   <param name="reservationReservationId" value="#{reservationHome.reservationReservationId}"/>
+   <param name="accomodationModeFrom"/>
+   <param name="accomodationModeAccomodationModeId" value="#{accomodationModeHome.accomodationModeAccomodationModeId}"/>
+
+   <param name="customerFrom"/>
+   <param name="customerCustomerId" value="#{customerHome.customerCustomerId}"/>
+   <param name="privilageFrom"/>
+   <param name="privilagePrivilageId" value="#{privilageHome.privilagePrivilageId}"/>
+
+
+   <param name="paymentFrom"/>
+   <param name="paymentPaymentId" value="#{paymentHome.paymentPaymentId}"/>
+
+
+   <param name="roomFrom"/>
+   <param name="roomRoomId" value="#{roomHome.roomRoomId}"/>
+   <param name="roomCategoryFrom"/>
+   <param name="roomCategoryRoomCategoryId" value="#{roomCategoryHome.roomCategoryRoomCategoryId}"/>
+
+   <param name="roomTypeFrom"/>
+   <param name="roomTypeRoomTypeId" value="#{roomTypeHome.roomTypeRoomTypeId}"/>
+
+
+
+
+</page>

@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+A:\Java SW\eclipse_Luna_WS\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3215150897.index
+3525667352.index
+3232242216.index
+40751030.index
+1444908051.index
+1022421244.index

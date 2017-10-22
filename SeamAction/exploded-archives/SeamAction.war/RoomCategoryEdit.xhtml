@@ -1,0 +1,272 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    <h:form id="roomCategory" styleClass="edit">
+    
+        <rich:panel>
+            <f:facet name="header">#{roomCategoryHome.managed ? 'Edit' : 'Add'} RoomCategory</f:facet>
+
+
+            <s:decorate id="roomCategoryIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">roomCategoryId</ui:define>
+                <h:inputText id="roomCategoryId"
+                       required="true"
+                       disabled="#{roomCategoryHome.managed}"
+                          value="#{roomCategoryHome.instance.roomCategoryId}">
+                    <a:support event="onblur" reRender="roomCategoryIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="descriptionDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">description</ui:define>
+                <h:inputTextarea id="description"
+                               cols="80"
+                               rows="3"
+                              value="#{roomCategoryHome.instance.description}"/>
+            </s:decorate>
+
+
+            <s:decorate id="imageNameDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">imageName</ui:define>
+                <h:inputTextarea id="imageName"
+                               cols="80"
+                               rows="3"
+                              value="#{roomCategoryHome.instance.imageName}"/>
+            </s:decorate>
+
+
+            <s:decorate id="roomCategotyTypeDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">roomCategotyType</ui:define>
+                <h:inputTextarea id="roomCategotyType"
+                               cols="80"
+                               rows="3"
+                              value="#{roomCategoryHome.instance.roomCategotyType}"/>
+            </s:decorate>
+
+
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+        </rich:panel>
+                
+        <div class="actionButtons">
+
+            <h:commandButton id="save" 
+                          value="Save" 
+                         action="#{roomCategoryHome.persist}"
+                       disabled="#{!roomCategoryHome.wired}"
+                       rendered="#{!roomCategoryHome.managed}"/>  
+                          			  
+            <h:commandButton id="update" 
+                          value="Save" 
+                         action="#{roomCategoryHome.update}"
+                       rendered="#{roomCategoryHome.managed}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{roomCategoryHome.remove}"
+                      immediate="true"
+                       rendered="#{roomCategoryHome.managed}"/>
+                    
+            <s:button id="done" 
+                   value="Done"
+             propagation="end"
+                    view="/RoomCategory.xhtml"
+                rendered="#{roomCategoryHome.managed}"/>
+                
+            <s:button id="cancel" 
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty roomCategoryFrom ? 'RoomCategoryList' : roomCategoryFrom}.xhtml"
+                rendered="#{!roomCategoryHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="roomPools">
+        <div class="association" id="roomPoolsChildren">
+        
+            <h:outputText value="There are no roomPools associated with this roomCategory." 
+                       rendered="#{empty roomCategoryHome.roomPools}"/>
+        
+            <rich:dataTable value="#{roomCategoryHome.roomPools}" 
+                           var="roomPool" 
+                      rendered="#{not empty roomCategoryHome.roomPools}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="roomPoolsTable">
+                <h:column>
+                    <f:facet name="header">roomPoolId</f:facet>
+                    <h:outputText value="#{roomPool.roomPoolId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">availableRooms</f:facet>
+                    <h:outputText value="#{roomPool.availableRooms}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">totalNoofRooms</f:facet>
+                    <h:outputText value="#{roomPool.totalNoofRooms}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">action</f:facet>
+                    <s:link view="/RoomPool.xhtml" 
+                              id="selectroomPool" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="roomPoolRoomPoolId" 
+                                value="#{roomPool.roomPoolId}"/>
+                        <f:param name="roomPoolFrom" value="RoomCategory"/>
+                    </s:link>
+                </h:column>
+            </rich:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{roomCategoryHome.managed}" id="roomPools">
+        <div class="actionButtons">
+            <s:button id="addroomPool" 
+                   value="Add roomPool"
+                    view="/RoomPoolEdit.xhtml"
+             propagation="none">
+                 <f:param name="roomCategoryRoomCategoryId" 
+                         value="#{roomCategoryHome.instance.roomCategoryId}"/>
+                 <f:param name="roomPoolFrom" value="RoomCategory"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+
+    <rich:tab label="roomRateses">
+        <div class="association" id="roomRatesesChildren">
+        
+            <h:outputText value="There are no roomRateses associated with this roomCategory." 
+                       rendered="#{empty roomCategoryHome.roomRateses}"/>
+        
+            <rich:dataTable value="#{roomCategoryHome.roomRateses}" 
+                           var="roomRates" 
+                      rendered="#{not empty roomCategoryHome.roomRateses}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="roomRatesesTable">
+                <h:column>
+                    <f:facet name="header">roomRateId</f:facet>
+                    <h:outputText value="#{roomRates.roomRateId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">price</f:facet>
+                    <h:outputText value="#{roomRates.price}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">validFrom</f:facet>
+                    <h:outputText value="#{roomRates.validFrom}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">validTo</f:facet>
+                    <h:outputText value="#{roomRates.validTo}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">action</f:facet>
+                    <s:link view="/RoomRates.xhtml" 
+                              id="selectroomRates" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="roomRatesRoomRateId" 
+                                value="#{roomRates.roomRateId}"/>
+                        <f:param name="roomRatesFrom" value="RoomCategory"/>
+                    </s:link>
+                </h:column>
+            </rich:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{roomCategoryHome.managed}" id="roomRateses">
+        <div class="actionButtons">
+            <s:button id="addroomRates" 
+                   value="Add roomRates"
+                    view="/RoomRatesEdit.xhtml"
+             propagation="none">
+                 <f:param name="roomCategoryRoomCategoryId" 
+                         value="#{roomCategoryHome.instance.roomCategoryId}"/>
+                 <f:param name="roomRatesFrom" value="RoomCategory"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+
+    <rich:tab label="rooms">
+        <div class="association" id="roomsChildren">
+        
+            <h:outputText value="There are no rooms associated with this roomCategory." 
+                       rendered="#{empty roomCategoryHome.rooms}"/>
+        
+            <rich:dataTable value="#{roomCategoryHome.rooms}" 
+                           var="room" 
+                      rendered="#{not empty roomCategoryHome.rooms}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="roomsTable">
+                <h:column>
+                    <f:facet name="header">roomId</f:facet>
+                    <h:outputText value="#{room.roomId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">floorNumber</f:facet>
+                    <h:outputText value="#{room.floorNumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomDescription</f:facet>
+                    <h:outputText value="#{room.roomDescription}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">roomNumber</f:facet>
+                    <h:outputText value="#{room.roomNumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">action</f:facet>
+                    <s:link view="/Room.xhtml" 
+                              id="selectroom" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="roomRoomId" 
+                                value="#{room.roomId}"/>
+                        <f:param name="roomFrom" value="RoomCategory"/>
+                    </s:link>
+                </h:column>
+            </rich:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{roomCategoryHome.managed}" id="rooms">
+        <div class="actionButtons">
+            <s:button id="addroom" 
+                   value="Add room"
+                    view="/RoomEdit.xhtml"
+             propagation="none">
+                 <f:param name="roomCategoryRoomCategoryId" 
+                         value="#{roomCategoryHome.instance.roomCategoryId}"/>
+                 <f:param name="roomFrom" value="RoomCategory"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

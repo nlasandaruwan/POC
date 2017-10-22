@@ -1,0 +1,209 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/template.xhtml">
+                       
+<ui:define name="body">
+    
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    <h:form id="privilage" styleClass="edit">
+    
+        <rich:panel>
+            <f:facet name="header">#{privilageHome.managed ? 'Edit' : 'Add'} Privilage</f:facet>
+
+
+            <s:decorate id="privilageIdDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">privilageId</ui:define>
+                <h:inputText id="privilageId"
+                       required="true"
+                       disabled="#{privilageHome.managed}"
+                          value="#{privilageHome.instance.privilageId}">
+                    <a:support event="onblur" reRender="privilageIdDecoration" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+
+            <s:decorate id="descriptionDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">description</ui:define>
+                <h:inputTextarea id="description"
+                               cols="80"
+                               rows="3"
+                              value="#{privilageHome.instance.description}"/>
+            </s:decorate>
+
+
+            <s:decorate id="privilageNameDecoration" template="layout/edit.xhtml">
+                <ui:define name="label">privilageName</ui:define>
+                <h:inputTextarea id="privilageName"
+                               cols="80"
+                               rows="3"
+                              value="#{privilageHome.instance.privilageName}"/>
+            </s:decorate>
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+        </rich:panel>
+                
+        <div class="actionButtons">
+
+            <h:commandButton id="save" 
+                          value="Save" 
+                         action="#{privilageHome.persist}"
+                       disabled="#{!privilageHome.wired}"
+                       rendered="#{!privilageHome.managed}"/>  
+                          			  
+            <h:commandButton id="update" 
+                          value="Save" 
+                         action="#{privilageHome.update}"
+                       rendered="#{privilageHome.managed}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="Delete" 
+                         action="#{privilageHome.remove}"
+                      immediate="true"
+                       rendered="#{privilageHome.managed}"/>
+                    
+            <s:button id="done" 
+                   value="Done"
+             propagation="end"
+                    view="/Privilage.xhtml"
+                rendered="#{privilageHome.managed}"/>
+                
+            <s:button id="cancel" 
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty privilageFrom ? 'PrivilageList' : privilageFrom}.xhtml"
+                rendered="#{!privilageHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="customers">
+        <div class="association" id="customersChildren">
+        
+            <h:outputText value="There are no customers associated with this privilage." 
+                       rendered="#{empty privilageHome.customers}"/>
+        
+            <rich:dataTable value="#{privilageHome.customers}" 
+                           var="customer" 
+                      rendered="#{not empty privilageHome.customers}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="customersTable">
+                <h:column>
+                    <f:facet name="header">customerId</f:facet>
+                    <h:outputText value="#{customer.customerId}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">address1</f:facet>
+                    <h:outputText value="#{customer.address1}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">address2</f:facet>
+                    <h:outputText value="#{customer.address2}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">contactLand</f:facet>
+                    <h:outputText value="#{customer.contactLand}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">contactMobile</f:facet>
+                    <h:outputText value="#{customer.contactMobile}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">country</f:facet>
+                    <h:outputText value="#{customer.country}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">email</f:facet>
+                    <h:outputText value="#{customer.email}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">firstName</f:facet>
+                    <h:outputText value="#{customer.firstName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">lastName</f:facet>
+                    <h:outputText value="#{customer.lastName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">nicPassportNo</f:facet>
+                    <h:outputText value="#{customer.nicPassportNo}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">password</f:facet>
+                    <h:outputText value="#{customer.password}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">passwordRecoverAnswer</f:facet>
+                    <h:outputText value="#{customer.passwordRecoverAnswer}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">passwordRecoverQuestion</f:facet>
+                    <h:outputText value="#{customer.passwordRecoverQuestion}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">postalCode</f:facet>
+                    <h:outputText value="#{customer.postalCode}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">state</f:facet>
+                    <h:outputText value="#{customer.state}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">streetNumber</f:facet>
+                    <h:outputText value="#{customer.streetNumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">title</f:facet>
+                    <h:outputText value="#{customer.title}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">userName</f:facet>
+                    <h:outputText value="#{customer.userName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">action</f:facet>
+                    <s:link view="/Customer.xhtml" 
+                              id="selectcustomer" 
+                           value="Select"
+                     propagation="none">
+                        <f:param name="customerCustomerId" 
+                                value="#{customer.customerId}"/>
+                        <f:param name="customerFrom" value="Privilage"/>
+                    </s:link>
+                </h:column>
+            </rich:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{privilageHome.managed}" id="customers">
+        <div class="actionButtons">
+            <s:button id="addcustomer" 
+                   value="Add customer"
+                    view="/CustomerEdit.xhtml"
+             propagation="none">
+                 <f:param name="privilagePrivilageId" 
+                         value="#{privilageHome.instance.privilageId}"/>
+                 <f:param name="customerFrom" value="Privilage"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

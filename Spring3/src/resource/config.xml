@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation=
+	"http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/util 
+     http://www.springframework.org/schema/util/spring-util.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:property-placeholder location="source/ReportConfig.properties,source/AbstractConfig.properties"
+								  ignore-unresolvable="true"/>
+	
+	<bean id="volunteer" class="source.Volunteer" 
+		p:thoughts="#{magic.getDoMagic().toUpperCase()+' '+23}" 
+		p:rate="#{1e4}">
+		<!-- <property name="thoughts" value="#{magic.doMagic.toUpperCase()}"></property> -->
+		<!-- <property name="rate" value="#{19}"></property> -->
+		<property name="batten"
+			value="#{magic.doMagic.toUpperCase()+' '+T(source.Magician).BATTEN}"></property>
+		
+		<!-- <property name="volanteeEmail" value="#{magic.magiEmail matches'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com'}" /> -->
+		<property name="volanteeEmail" value="#{magic.magiEmail}"/>
+			 <!-- matches'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com' -->
+			 
+		<!-- <property name = "isVolunteerPaid" value="#{magic.isMagicianPaid}" /> -->
+		
+		<!-- null safe access of a property -->
+		<property name = "nullSafeAssign" value="#{magic.getNullSafeAccess() ?.toUpperCase()}" />
+		
+	</bean>
+
+	<bean id="magic" class="source.Magician" 
+		p:doMagic="Its a Magic Sandaruwan"
+		p:pi="#{T(java.lang.Math).PI}">
+		
+		<!-- <property name="magiEmail" value="#{'nlasandaruwan@gmail.com'}"></property> -->
+		<property name='magiEmail' value='#{"nlasandaruwan@gmail.com"}'></property>
+		<!-- <property name="isMagicianPaid" value="#{true}"></property> -->
+		<property name="fromProp" value="${aa}"></property>
+		<!-- <property name="nullSafeAccess" value="aaaaaaaa"></property> -->
+		<property name="nullSafeAccess"><null/></property>
+		<property name="cityOfMagician" value="#{cities[2]}"></property>
+		
+		<!-- Load from property file -->
+		<!-- <property name="valueFromProperty" value="#{settingProp['aa.aa']}"></property> -->
+		
+		<!-- Load from System environment -->
+		<property name="valueFromProperty" value="#{systemEnvironment['ANT_HOME']}"></property>
+		
+		<!-- filter cities from cities list and assign to big cities list -->
+		<property name="bigCities" value="#{cities.?[population gt 1000000]}"></property>
+		
+		
+	</bean>
+	
+	<util:list id="cities">
+		<bean class="source.City" p:name="Chicago" p:state="IL" p:population="2853114" />
+		<bean class="source.City" p:name="Atlanta" p:state="GA" p:population="537958" />
+		<bean class="source.City" p:name="Dallas" p:state="TX"	p:population="1279910" />
+		<bean class="source.City" p:name="Houston"	p:state="TX" p:population="2242193" />
+		<bean class="source.City" p:name="Odessa" p:state="TX"	p:population="90943" />
+		<bean class="source.City" p:name="El Paso"	p:state="TX" p:population="613190" />
+		<bean class="source.City" p:name="Jal" p:state="NM"	p:population="1996" />
+		<bean class="source.City" p:name="Las Cruces" p:state="NM" p:population="91865" />
+	</util:list>
+	
+	<util:properties id="settingProp" location="source/UtilPropertiesLoad.properties"/>
+	
+	
+</beans>

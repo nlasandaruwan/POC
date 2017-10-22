@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.0.xsd">
+      
+   <param name="firstResult" value="#{customerList.firstResult}"/>
+   <param name="order" value="#{customerList.order}"/>
+   <param name="from"/>
+   <param name="address1" value="#{customerList.customer.address1}"/>
+   <param name="address2" value="#{customerList.customer.address2}"/>
+   <param name="contactLand" value="#{customerList.customer.contactLand}"/>
+   <param name="contactMobile" value="#{customerList.customer.contactMobile}"/>
+   <param name="country" value="#{customerList.customer.country}"/>
+   <param name="email" value="#{customerList.customer.email}"/>
+   <param name="firstName" value="#{customerList.customer.firstName}"/>
+   <param name="lastName" value="#{customerList.customer.lastName}"/>
+   <param name="nicPassportNo" value="#{customerList.customer.nicPassportNo}"/>
+   <param name="password" value="#{customerList.customer.password}"/>
+   <param name="passwordRecoverAnswer" value="#{customerList.customer.passwordRecoverAnswer}"/>
+   <param name="passwordRecoverQuestion" value="#{customerList.customer.passwordRecoverQuestion}"/>
+   <param name="postalCode" value="#{customerList.customer.postalCode}"/>
+   <param name="state" value="#{customerList.customer.state}"/>
+   <param name="streetNumber" value="#{customerList.customer.streetNumber}"/>
+   <param name="title" value="#{customerList.customer.title}"/>
+   <param name="userName" value="#{customerList.customer.userName}"/>
+
+</page>
